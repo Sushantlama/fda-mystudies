@@ -19,8 +19,6 @@ import com.google.cloud.healthcare.fdamystudies.common.UserMgmntAuditHelper;
 import com.google.cloud.healthcare.fdamystudies.mapper.AuditEventMapper;
 import com.google.cloud.healthcare.fdamystudies.service.StudiesServices;
 import com.google.cloud.healthcare.fdamystudies.util.ErrorCode;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -35,10 +33,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(
-    tags = "Studies",
-    value = "Studies",
-    description = "Operations pertaining to Studies in user management service")
 @RestController
 @Validated
 @RequestMapping("/studies")
@@ -49,7 +43,6 @@ public class StudiesController {
 
   @Autowired private UserMgmntAuditHelper userMgmntAuditHelper;
 
-  @ApiOperation(value = "Add or update studymetadata")
   @PostMapping("/studymetadata")
   public ResponseEntity<?> addUpdateStudyMetadata(
       @Valid @RequestBody StudyMetadataBean studyMetadataBean, HttpServletRequest request) {
@@ -70,7 +63,6 @@ public class StudiesController {
     return new ResponseEntity<>(errorBean, HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Send Notification")
   @PostMapping("/sendNotification")
   public ResponseEntity<?> SendNotification(
       @Valid @RequestBody NotificationForm notificationForm, HttpServletRequest request)

@@ -48,7 +48,7 @@
 
           <td>${study.appId}</td>
           <td>
-            <div class="studylist-txtoverflow">${study.name}</div>
+            <div class="studylist-txtoverflow" title="${fn:escapeXml(study.name)}">${study.name}</div>
           </td>
           <td class ="studyStatus${study.customStudyId}">${study.status}</td>
           <td>
@@ -145,6 +145,7 @@
     $("#studies_list").DataTable({
         "paging": true,
         "abColumns": [
+          {"bSortable": true},
           {"bSortable": true},
           {"bSortable": true},
           {"bSortable": true},

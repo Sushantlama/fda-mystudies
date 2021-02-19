@@ -51,7 +51,7 @@
 <style>
  header.header {
 	 width: 100%;
-	 height: 60px;
+	 height: 50px;
 	 background-color: #fff;
 	 user-select: none;
 }
@@ -119,7 +119,7 @@ html, body {
           <img
             class="mr-sm width__auto"
            src="/studybuilder/images/logo/logo_innerScreens.png"
-            alt="main logo" style="margin-top: 7px; margin-left: 25px;"
+            alt="main logo"
           />
         </a>
         </div>

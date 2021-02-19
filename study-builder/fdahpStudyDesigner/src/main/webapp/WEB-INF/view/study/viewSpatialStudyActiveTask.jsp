@@ -2,15 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<style>
-	.bootstrap-select.btn-group .dropdown-toggle .filter-option {
-	    text-transform: inherit; !important
-		}
-		
-	.help-block ul {
-      width: max-content !important;
-    }
-</style>
 <div class="changeContent">
   <form:form
       action="/studybuilder/adminStudies/saveOrUpdateActiveTaskContent.do?_S=${param._S}"
@@ -28,14 +19,14 @@
            name="currentPage">
     <div class="pt-lg">
       <div class="gray-xs-f mb-sm">
-        Activity short title or key
+        Activity Short Title or Key
         <small>(50 characters max)</small>
         <span
             class="requiredStar"> *
         </span>
         <span
             class="ml-xs sprites_v3 filled-tooltip" data-toggle="tooltip"
-            title="A human-readable identifier that must be unique across all activities of the study. Allowed characters are lowercase alphabets (a-z), digits (0-9), _ (underscore) and -(minus)."></span>
+            title="This must be a human-readable activity identifier and unique across all activities of the study.Note that this field cannot be edited once the study is Launched."></span>
       </div>
       <div class="add_notify_option">
         <div class="form-group shortTitleClass">
@@ -356,7 +347,7 @@
                   id="${taskMasterAttributeBo.attributeName}_stat_id" class="statisticsBlock"
                   name="taskAttributeValueBos[7].useForStatistic" value="option1">
                 <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use
-                  for statistic</label>
+                  for Statistic</label>
               </span>
             </div>
             <div
@@ -384,8 +375,8 @@
 
               <div>
                 <div class="gray-xs-f mb-sm">
-                  Display name for the stat (e.g. Total hours of activity over 6
-                  months)
+                  Display name for the Stat (e.g. Total Hours of Activity Over 6
+                  Months)
                   <small>(50 characters max)</small>
                   <span
                       class="requiredStar"> *
@@ -400,7 +391,7 @@
 
               <div>
                 <div class="gray-xs-f mb-sm">
-                  Display units (e.g. hours)
+                  Display Units (e.g. hours)
                   <small>(15 characters max)</small>
                   <span
                       class="requiredStar"> *
@@ -418,7 +409,7 @@
 
               <div>
                 <div class="gray-xs-f mb-sm">
-                  Stat type for image display
+                  Stat Type for image display
                   <span class="requiredStar"> *</span>
                 </div>
                 <div class="add_notify_option form-group">
@@ -547,7 +538,7 @@
                   id="${taskMasterAttributeBo.attributeName}_stat_id" class="statisticsBlock"
                   name="taskAttributeValueBos[8].useForStatistic" value="option1">
                 <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use
-                  for statistic</label>
+                  for Statistic</label>
               </span>
             </div>
             <div
@@ -575,8 +566,8 @@
 
               <div>
                 <div class="gray-xs-f mb-sm">
-                  Display name for the stat (e.g. Total hours of activity over 6
-                  months)
+                  Display name for the Stat (e.g. Total Hours of Activity Over 6
+                  Months)
                   <small>(50 characters max)</small>
                   <span
                       class="requiredStar"> *
@@ -591,7 +582,7 @@
 
               <div>
                 <div class="gray-xs-f mb-sm">
-                  Display units (e.g. hours)
+                  Display Units (e.g. hours)
                   <small>(15 characters max)</small>
                   <span
                       class="requiredStar"> *
@@ -609,7 +600,7 @@
 
               <div>
                 <div class="gray-xs-f mb-sm">
-                  Stat type for image display
+                  Stat Type for image display
                   <span class="requiredStar"> *</span>
                 </div>
                 <div class="add_notify_option form-group">
@@ -738,7 +729,7 @@
                   id="${taskMasterAttributeBo.attributeName}_stat_id" class="statisticsBlock"
                   name="taskAttributeValueBos[9].useForStatistic" value="option1">
                 <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use
-                  for statistic</label>
+                  for Statistic</label>
               </span>
             </div>
             <div
@@ -766,8 +757,8 @@
 
               <div>
                 <div class="gray-xs-f mb-sm">
-                  Display name for the stat (e.g. Total hours of activity over 6
-                  months)
+                  Display name for the Stat (e.g. Total Hours of Activity Over 6
+                  Months)
                   <small>(50 characters max)</small>
                   <span
                       class="requiredStar"> *
@@ -782,7 +773,7 @@
 
               <div>
                 <div class="gray-xs-f mb-sm">
-                  Display units (e.g. hours)
+                  Display Units (e.g. hours)
                   <small>(15 characters max)</small>
                   <span
                       class="requiredStar"> *
@@ -800,7 +791,7 @@
 
               <div>
                 <div class="gray-xs-f mb-sm">
-                  Stat type for image display
+                  Stat Type for image display
                   <span class="requiredStar"> *</span>
                 </div>
                 <div class="add_notify_option form-group">
@@ -1164,7 +1155,7 @@
                            <c:if
                                test="${taskValueAttributeBo.useForStatistic==true}">checked</c:if>
                            value="${taskValueAttributeBo.useForStatistic}">
-                    <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use for statistic</label>
+                    <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use for Statistic</label>
                   </span>
                 </div>
                 <div class="addLineStaticBlock_${taskMasterAttributeBo.attributeName}"
@@ -1197,8 +1188,8 @@
                   </div>
 
                   <div>
-                    <div class="gray-xs-f mb-sm">Display name for the stat (e.g. Total hours of
-                      activity over 6 months)
+                    <div class="gray-xs-f mb-sm">Display name for the Stat (e.g. Total Hours of
+                      Activity Over 6 Months)
                       <small> (50 characters max)</small>
                       <span
                           class="requiredStar"> *
@@ -1214,7 +1205,7 @@
 
 
                   <div>
-                    <div class="gray-xs-f mb-sm">Display units (e.g. hours)
+                    <div class="gray-xs-f mb-sm">Display Units (e.g. hours)
                       <small>(15 characters
                         max)
                       </small>
@@ -1231,7 +1222,7 @@
                   </div>
                   <div>
                     <div>
-                      <div class="gray-xs-f mb-sm">Stat type for image display
+                      <div class="gray-xs-f mb-sm">Stat Type for image display
                         <span
                             class="requiredStar"> *
                         </span>
@@ -1375,7 +1366,7 @@
                          <c:if
                              test="${taskValueAttributeBo.useForStatistic==true}">checked</c:if>
                          value="${taskValueAttributeBo.useForStatistic}">
-                  <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use for statistic</label>
+                  <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use for Statistic</label>
                 </span>
               </div>
               <div class="addLineStaticBlock_${taskMasterAttributeBo.attributeName}"
@@ -1407,9 +1398,9 @@
                 </div>
 
                 <div>
-                  <div class="gray-xs-f mb-sm">Display name for the stat (e.g. Total hours of
-                    activity
-                    over 6 months)
+                  <div class="gray-xs-f mb-sm">Display name for the Stat (e.g. Total Hours of
+                    Activity
+                    Over 6 Months)
                     <small> (50 characters max)</small>
                     <span
                         class="requiredStar"> *
@@ -1425,7 +1416,7 @@
 
 
                 <div>
-                  <div class="gray-xs-f mb-sm">Display units (e.g. hours)
+                  <div class="gray-xs-f mb-sm">Display Units (e.g. hours)
                     <small>(15 characters
                       max)
                     </small>
@@ -1442,7 +1433,7 @@
                 </div>
                 <div>
                   <div>
-                    <div class="gray-xs-f mb-sm">Stat type for image display
+                    <div class="gray-xs-f mb-sm">Stat Type for image display
                       <span
                           class="requiredStar"> *
                       </span>
@@ -1583,7 +1574,7 @@
                          <c:if
                              test="${taskValueAttributeBo.useForStatistic==true}">checked</c:if>
                          value="${taskValueAttributeBo.useForStatistic}">
-                  <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use for statistic</label>
+                  <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use for Statistic</label>
                 </span>
               </div>
               <div class="addLineStaticBlock_${taskMasterAttributeBo.attributeName}"
@@ -1615,9 +1606,9 @@
                 </div>
 
                 <div>
-                  <div class="gray-xs-f mb-sm">Display name for the stat (e.g. Total hours of
-                    activity
-                    over 6 months)
+                  <div class="gray-xs-f mb-sm">Display name for the Stat (e.g. Total Hours of
+                    Activity
+                    Over 6 Months)
                     <small> (50 characters max)</small>
                     <span
                         class="requiredStar"> *
@@ -1633,7 +1624,7 @@
 
 
                 <div>
-                  <div class="gray-xs-f mb-sm">Display units (e.g. hours)
+                  <div class="gray-xs-f mb-sm">Display Units (e.g. hours)
                     <small>(15 characters
                       max)
                     </small>
@@ -1650,7 +1641,7 @@
                 </div>
                 <div>
                   <div>
-                    <div class="gray-xs-f mb-sm">Stat type for image display
+                    <div class="gray-xs-f mb-sm">Stat Type for image display
                       <span
                           class="requiredStar"> *
                       </span>
@@ -1700,19 +1691,19 @@
         <span class="mr-lg">
           <span class="mr-sm"><img
               src="../images/icons/tick.png"/></span>
-          <span>Current day</span>
+          <span>Current Day</span>
         </span>
         <span
             class="mr-lg">
           <span class="mr-sm"><img
               src="../images/icons/tick.png"/></span>
-          <span>Current week</span>
+          <span>Current Week</span>
         </span>
         <span
             class="mr-lg">
           <span class="mr-sm"><img
               src="../images/icons/tick.png"/></span>
-          <span>Current month</span>
+          <span>Current Month</span>
         </span>
         <span
             class="txt-gray">(Rollback option provided for these
@@ -1901,10 +1892,6 @@
     $('#static1, #static2, #static3').on('keyup', function () {
       $(this).parent().find(".help-block").empty();
       $('.statShortTitleClass').parent().removeClass("has-danger").removeClass("has-error");
-    });
-    $('#shortTitleId').on('keyup', function () {
-        $(this).parent().find(".help-block").empty();
-        $('.shortTitleClass').parent().removeClass("has-danger").removeClass("has-error");
     });
     $('#static1, #static2, #static3').blur(function () {
       validateShortTitleStatId('', this, function (val) {
@@ -2332,13 +2319,14 @@
       if (charCode == 16)
         isShift = false;
       if (!isShift && $(this).val()) {
-        var regularExpression = /^[a-z0-9_-]*$/;
+        var regularExpression = /^[A-Za-z0-9*()_+|:.-]*$/;
         if (!regularExpression.test($(this).val())) {
-          var newVal = $(this).val().replace(/[^a-z0-9_-]/g, '');
+          var newVal = $(this).val().replace(/[^A-Za-z0-9\*\(\)_+|:.\-]/g, '');
           e.preventDefault();
           $(this).val(newVal);
+          $(this).parent().addClass("has-danger has-error");
           $(this).parent().find(".help-block").empty().append($("<ul><li> </li></ul>").attr("class","list-unstyled").text(
-              "Please use allowed characters only: lowercase alphabets (a-z), digits (0-9), _ (underscore) and -(minus)."));
+              "The characters like (< >) are not allowed."));
         }
       }
     });

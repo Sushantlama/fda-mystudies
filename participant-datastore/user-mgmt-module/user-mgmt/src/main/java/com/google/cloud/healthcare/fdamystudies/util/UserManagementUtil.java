@@ -108,10 +108,7 @@ public class UserManagementUtil {
   }
 
   public String withdrawParticipantFromStudy(
-      String participantId,
-      String studyId,
-      String studyVersion,
-      AuditLogEventRequest auditRequest) {
+      String participantId, String studyId, String delete, AuditLogEventRequest auditRequest) {
     logger.info("UserManagementUtil withDrawParticipantFromStudy() - starts ");
     HttpHeaders headers = null;
     HttpEntity<WithdrawFromStudyBodyProvider> request = null;
@@ -120,6 +117,7 @@ public class UserManagementUtil {
 
     headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
+    headers.set(AppConstants.APPLICATION_ID, null);
     headers.add("Authorization", "Bearer " + oauthService.getAccessToken());
     AuditEventMapper.addAuditEventHeaderParams(headers, auditRequest);
 
@@ -129,17 +127,15 @@ public class UserManagementUtil {
         appConfig.getWithdrawStudyUrl()
             + "?studyId="
             + studyId
-            + "&studyVersion="
-            + studyVersion
             + "&participantId="
-            + participantId;
+            + participantId
+            + "&deleteResponses="
+            + String.valueOf(delete);
 
     ResponseEntity<?> response = restTemplate.postForEntity(url, request, String.class);
 
-    logger.info("Withdrawal status code" + response.getStatusCode());
     if (response.getStatusCode() == HttpStatus.OK) {
       userMgmntAuditHelper.logEvent(WITHDRAWAL_INTIMATED_TO_RESPONSE_DATASTORE, auditRequest);
-      logger.info("WITHDRAWAL_INTIMATED_TO_RESPONSE_DATASTORE");
       message = MyStudiesUserRegUtil.ErrorCodes.SUCCESS.getValue();
     }
 

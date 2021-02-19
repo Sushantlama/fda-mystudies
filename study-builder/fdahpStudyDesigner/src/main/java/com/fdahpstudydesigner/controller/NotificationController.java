@@ -363,7 +363,7 @@ public class NotificationController {
             && notification
                 .getNotificationScheduleType()
                 .equals(FdahpStudyDesignerConstants.NOTIFICATION_NOTIMMEDIATE)) {
-          notification.setCheckNotificationSendingStatus("Scheduled");
+          notification.setCheckNotificationSendingStatus("Not sent");
         } else if (!notification.isNotificationSent()
             && notification
                 .getNotificationScheduleType()

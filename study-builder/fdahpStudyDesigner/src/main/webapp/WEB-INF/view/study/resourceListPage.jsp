@@ -203,11 +203,11 @@
               $("#alertMsg").removeClass('s-box').addClass('e-box').text(
                   "Unable to reorder consent.");
             }
-            setTimeout(hideDisplayMessage, 5000);
+            setTimeout(hideDisplayMessage, 4000);
           },
           error: function (xhr, status, error) {
             $("#alertMsg").removeClass('s-box').addClass('e-box').text(error);
-            setTimeout(hideDisplayMessage, 5000);
+            setTimeout(hideDisplayMessage, 4000);
           }
         });
       }
@@ -252,11 +252,11 @@
                     "Unable to delete resource.");
                 $('#alertMsg').show();
               }
-              setTimeout(hideDisplayMessage, 5000);
+              setTimeout(hideDisplayMessage, 4000);
             },
             error: function (xhr, status, error) {
               $("#alertMsg").removeClass('s-box').addClass('e-box').text(error);
-              setTimeout(hideDisplayMessage, 5000);
+              setTimeout(hideDisplayMessage, 4000);
             }
           });
         }

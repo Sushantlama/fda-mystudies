@@ -81,7 +81,8 @@
             <tr id="row${activeTasksInfo.id}">
               <td style="display: none;">${activeTasksInfo.createdDate}</td>
               <td>
-                <div class="dis-ellipsis pr-100">${activeTasksInfo.displayName}</div>
+                <div class="dis-ellipsis pr-100"
+                     title="${fn:escapeXml(activeTasksInfo.displayName)}">${activeTasksInfo.displayName}</div>
               </td>
               <td>${activeTasksInfo.type}</td>
               <td>${activeTasksInfo.frequency  == 'Manually Schedule' ? 'Custom Schedule' : activeTasksInfo.frequency}</td>
@@ -228,11 +229,11 @@
                       "Unable to delete resource");
                   $('#alertMsg').show();
                 }
-                setTimeout(hideDisplayMessage, 5000);
+                setTimeout(hideDisplayMessage, 4000);
               },
               error: function (xhr, status, error) {
                 $("#alertMsg").removeClass('s-box').addClass('e-box').text(error);
-                setTimeout(hideDisplayMessage, 5000);
+                setTimeout(hideDisplayMessage, 4000);
               }
             });
           }

@@ -74,12 +74,9 @@
                          test="${notificationBO.actionPage eq 'addOrCopy'}">checked</c:if>>
               <label for="inlineRadio1">Schedule this notification
               <span
-      <fmt:formatDate value = "${date}" pattern="z" var="server_timezone"/>
-          class="ml-xs sprites_v3 filled-tooltip Selectedtooltip"
-          data-toggle="tooltip"
-          data-placement="top"
-          title="The notification gets delivered to mobile app users at the selected date and time as per server time zone which is ${server_timezone}.">
-      </span>
+               data-toggle="tooltip" data-placement="top"
+               title="The notification will get fired at the selected date and time as per server time zone."
+               class="filled-tooltip"></span>
               </label>
             </span>
             <span class="radio radio-inline">
@@ -213,9 +210,10 @@
 </form:form>
 <script>
   $(document).ready(function () {
-	$('[data-toggle="tooltip"]').tooltip();
+	  $('[data-toggle="tooltip"]').tooltip();
     $('#rowId').parent().removeClass('white-bg');
     $("#notification").addClass("active");
+
     <c:if test="${notificationBO.notificationSent || notificationBO.actionPage eq 'view'}">
     $('#appNotificationFormId input,textarea').prop('disabled', true);
     if ($('#inlineRadio2').prop('checked')) {
@@ -443,8 +441,4 @@
     }
     return valid;
   }
-
-  $(document).on('mouseenter', '.dropdown-toggle',  function () {
-      $(this).removeAttr("title");
-  });
 </script>

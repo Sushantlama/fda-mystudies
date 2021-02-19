@@ -9,8 +9,6 @@ import {LocationService} from '../../location/shared/location.service';
 import {ManageLocations} from '../../location/shared/location.model';
 import {ApiResponse} from 'src/app/entity/api.response.model';
 import {Observable, of} from 'rxjs';
-import { Site, SiteResponse } from '../../studies/shared/site.model';
-import { filter } from 'rxjs/operators';
 @Component({
   selector: 'add-site',
   templateUrl: './add-site.component.html',
@@ -20,14 +18,12 @@ export class AddSiteComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit {
   @Input() study = {} as Study;
-  @Output() closeModalEvent = new EventEmitter<Site>();
+  @Output() closeModalEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
   newSite = {} as Study;
   site = {} as AddSiteRequest;
   location$: Observable<ManageLocations> = of();
   disableButton = false;
-  addedSite = {} as Site;
-  siteName ='';
   constructor(
     private readonly siteService: SitesService,
     private readonly toastr: ToastrService,
@@ -47,17 +43,12 @@ export class AddSiteComponent
   getLocation(studyId: string): void {
     this.location$ = this.locationService.getLocationsForSiteCreation(studyId);
   }
-
-  
   add(): void {
     this.disableButton = true;
     this.subs.add(
       this.siteService.add(this.site).subscribe(
-        (successResponse: SiteResponse) => {
+        (successResponse: ApiResponse) => {
           this.disableButton = false;
-          this.addedSite.id = successResponse.siteId;
-          this.addedSite.name = successResponse.siteName;
-          this.addedSite.invited = 0;
           if (getMessage(successResponse.code)) {
             this.toastr.success(getMessage(successResponse.code));
           } else {
@@ -67,13 +58,13 @@ export class AddSiteComponent
         },
         () => {
           this.disableButton = false;
-          this.cancel();
+          this.closeModal();
         },
       ),
     );
   }
   closeModal(): void {
-    this.closeModalEvent.emit(this.addedSite);
+    this.closeModalEvent.next();
   }
   cancel(): void {
     this.cancelEvent.next();

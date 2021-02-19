@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Use of this source code is governed by an MIT-style
  * license that can be found in the LICENSE file or at
@@ -225,7 +225,6 @@ public class StudyQuestionnaireController {
               values.put(STEP_ID, questionBo.getShortTitle());
             }
             auditLogEventHelper.logEvent(STUDY_QUESTION_STEP_IN_FORM_DELETED, auditRequest, values);
-
             questionnairesStepsBo =
                 studyQuestionnaireService.getQuestionnaireStep(
                     Integer.valueOf(formId),

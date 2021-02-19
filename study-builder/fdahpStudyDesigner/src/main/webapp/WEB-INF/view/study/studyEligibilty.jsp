@@ -33,7 +33,7 @@
         <c:if test="${empty permission}">
           <div class="dis-line form-group mb-none mr-sm">
             <button type="button" class="btn btn-default gray-btn submitEle"
-                    actType="save" id="saveBtn">Save
+                    actType="save">Save
             </button>
           </div>
 
@@ -131,12 +131,9 @@
           </div>
           <div class="dis-line form-group mb-none mr-sm">
             <c:if test="${empty permission}">
-            <span id="spanAddQaId" class="tool-tip" data-toggle="tooltip"
-                  data-placement="bottom" data-original-title="">
               <button type="button" class="btn btn-primary blue-btn"
                       id="addQaId">+ Add question
               </button>
-              </span>
             </c:if>
           </div>
         </div>
@@ -159,7 +156,8 @@
               <tr id="">
                 <td>${etQusAns.sequenceNo}</td>
                 <td>
-                  <span class="dis-ellipsis">${etQusAns.question}</span>
+                  <span class="dis-ellipsis"
+                        title="${fn:escapeXml(etQusAns.question)}">${etQusAns.question}</span>
                 </td>
                 <td>
                   <span class="sprites_icon preview-g mr-lg viewIcon"
@@ -194,7 +192,11 @@
 <script type="text/javascript">
   var viewPermission = "${permission}";
   var permission = "${permission}";
-  var chkDone = ${chkDone};
+  var chkDone = $
+  {
+    chkDone
+  }
+  ;
   var eligibilityMechanism = '${eligibility.eligibilityMechanism}';
   console.log("viewPermission:" + viewPermission);
   var reorder = true;
@@ -216,17 +218,18 @@
 
             <c:if test="${empty eligibility.id}">
             $('#addQaId').prop('disabled', true);
-            $("#saveBtn").html("Next");
-            $('#spanAddQaId').attr('data-original-title', 'Please click on Next to start adding questions');
             $('.viewIcon, .editIcon, .deleteIcon').addClass('cursor-none');
             </c:if>
 
-            if(chkDone){
-                    $("#doneBut").attr("disabled", false);
-                    $('#spancomId').removeAttr('data-original-title');
+            if (emVal != "1") {
+              if (eligibilityTestSize === 0) {
+                $("#doneBut").attr("disabled", true);
+                $('#spancomId').attr('data-original-title',
+                    'Please ensure you add one or more Eligibility Test before attempting to mark this section as Complete.');
+              }
             }
-            
-            if (!chkDone && eligibilityMechanism != "1") {
+
+            if ((!chkDone) && eligibilityMechanism != "1") {
               $('#doneBut').prop('disabled', true);
               $('#spancomId')
                   .attr(
@@ -234,14 +237,6 @@
                       'Please ensure individual list items are marked Done, before marking the section as Complete');
               $('[data-toggle="tooltip"]').tooltip();
             }
-
-            if (emVal != "1") {
-                if (eligibilityTestSize === 0) {
-                  $("#doneBut").attr("disabled", true);
-                  $('#spancomId').attr('data-original-title',
-                      'Please add 1 or more questions to the test');
-                }
-             }
             initActions();
             $('.submitEle').click(
                 function (e) {
@@ -398,7 +393,7 @@
                                 }
                                 setTimeout(
                                     hideDisplayMessage,
-                                    5000);
+                                    4000);
                               },
                               error: function (
                                   xhr,
@@ -413,7 +408,7 @@
                                         error);
                                 setTimeout(
                                     hideDisplayMessage,
-                                    5000);
+                                    4000);
                               }
                             });
                       }
@@ -426,13 +421,13 @@
                           && eligibilityMechanism != $(
                               this).val()) {
                         $('#forceContinueMsgId').show();
-                        $('#addQaId').prop('disabled', true);
-                        $("#saveBtn").html("Next");
-                        $('#spanAddQaId').attr('data-original-title', 'Please click on Next to start adding questions');
+                        $('#addQaId').prop('disabled',
+                            true);
                         $(
                             '.viewIcon, .editIcon, .deleteIcon')
                             .addClass('cursor-none');
-                        if (!chkDone && $(this).val() != '1') {
+                        if (!chkDone
+                            && $(this).val() != '1') {
                           $('#doneBut').prop(
                               'disabled', true);
                           $('#spancomId')
@@ -442,9 +437,8 @@
                         }
                       } else {
                         $('#forceContinueMsgId').hide();
-                        $('#doneBut, #addQaId').prop('disabled', false);
-                        $("#saveBtn").html("Save");
-                        $("#spanAddQaId").removeAttr("data-original-title");
+                        $('#doneBut, #addQaId').prop(
+                            'disabled', false);
                         $('#spancomId').attr(
                             'data-original-title',
                             '');
@@ -452,7 +446,8 @@
                             '.viewIcon, .editIcon, .deleteIcon')
                             .removeClass(
                                 'cursor-none');
-                        if (!chkDone && $(this).val() != '1') {
+                        if (!chkDone
+                            && $(this).val() != '1') {
                           $('#doneBut').prop(
                               'disabled', true);
                           $('#spancomId')
@@ -466,8 +461,8 @@
                             .slideUp('fast');
                         $('#instructionTextDivId')
                             .slideDown('fast');
-                        $('#doneBut').prop('disabled',false);
-                        $('#spancomId').removeAttr('data-original-title');
+                        $('#doneBut').prop('disabled',
+                            false);
                       } else if ($('#inlineRadio3:checked').length > 0) {
                         $('#instructionTextDivId')
                             .slideUp('fast');
@@ -487,11 +482,12 @@
                       }
 
                       emVal = $("input[name='eligibilityMechanism']:checked").val();
+                      eligibilityTestSize =${eligibilityTestList.size()};
                       if (emVal != "1") {
-                        if (eligibilityTestSize == 0) {
+                        if (eligibilityTestSize === 0) {
                           $("#doneBut").attr("disabled", true);
                           $('#spancomId').attr('data-original-title',
-                              'Please add 1 or more questions to the test');
+                              'Please ensure you add one or more Eligibility Test before attempting to mark this section as Complete.');
                         }
                       }
 
@@ -567,7 +563,6 @@
                             reloadEligibiltyTestDataTable(data.eligibiltyTestList);
                             if ($('#consent_list tbody tr').length == 1
                                 && $('#consent_list tbody tr td').length == 1) {
-                              eligibilityTestSize--;
                               chkDone = false;
                               $('#doneBut').prop(
                                   'disabled',
@@ -585,7 +580,7 @@
                           }
                           setTimeout(
                               hideDisplayMessage,
-                              5000);
+                              4000);
                         },
                         error: function (xhr, status,
                                          error) {
@@ -595,7 +590,7 @@
                               .text(error);
                           setTimeout(
                               hideDisplayMessage,
-                              5000);
+                              4000);
                         }
                       });
                 }
@@ -634,8 +629,7 @@
                     + parseInt(obj.id)
                     + '"></span>'
                     + '<span class="sprites_icon copy delete deleteIcon" data-toggle="tooltip" data-placement="top" title="Delete" onclick="deleteEligibiltyTestQusAns('
-                    + parseInt(obj.id) + ',this)"></span> '
-                     datarow.push(actions);
+                datarow.push(actions);
                 $('#consent_list').DataTable().row.add(datarow);
               });
       $('#consent_list').DataTable().draw();
@@ -644,7 +638,7 @@
       $('#consent_list').DataTable().draw();
       $("#doneBut").attr("disabled", true);
       $('#spancomId').attr('data-original-title',
-          'Please add 1 or more questions to the test');
+          'Please ensure you add one or more Eligibility Test before attempting to mark this section as Complete.');
     }
   }
 

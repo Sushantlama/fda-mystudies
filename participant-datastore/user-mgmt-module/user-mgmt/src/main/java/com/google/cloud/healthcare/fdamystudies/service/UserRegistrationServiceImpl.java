@@ -119,8 +119,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         throw new ErrorCodeException(ErrorCode.PENDING_CONFIRMATION);
       }
 
-      EmailResponse emailResponse =
-          generateAndSaveVerificationCode(existingUserDetails, user.getAppName());
+      EmailResponse emailResponse = generateAndSaveVerificationCode(existingUserDetails);
 
       if (MessageCode.EMAIL_ACCEPTED_BY_MAIL_SERVER
           .getMessage()
@@ -152,7 +151,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     auditRequest.setUserId(userDetails.getUserId());
 
     // generate save and email the verification code
-    EmailResponse emailResponse = generateAndSaveVerificationCode(userDetails, user.getAppName());
+    EmailResponse emailResponse = generateAndSaveVerificationCode(userDetails);
 
     // verification code is empty if send email is failed
     if (MessageCode.EMAIL_ACCEPTED_BY_MAIL_SERVER.getMessage().equals(emailResponse.getMessage())) {
@@ -179,10 +178,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             || Timestamp.from(Instant.now()).after(userDetails.getCodeExpireDate()));
   }
 
-  private EmailResponse generateAndSaveVerificationCode(
-      UserDetailsEntity userDetails, String appName) {
+  private EmailResponse generateAndSaveVerificationCode(UserDetailsEntity userDetails) {
     String verificationCode = RandomStringUtils.randomAlphanumeric(VERIFICATION_CODE_LENGTH);
-    EmailResponse emailResponse = sendConfirmationEmail(userDetails, verificationCode, appName);
+    EmailResponse emailResponse = sendConfirmationEmail(userDetails, verificationCode);
     if (MessageCode.EMAIL_ACCEPTED_BY_MAIL_SERVER.getMessage().equals(emailResponse.getMessage())) {
       userDetails.setEmailCode(verificationCode);
       userDetails.setCodeExpireDate(Timestamp.valueOf(LocalDateTime.now().plusHours(expireTime)));
@@ -225,12 +223,12 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
   }
 
   private EmailResponse sendConfirmationEmail(
-      UserDetailsEntity userDetails, String verificationCode, String appName) {
+      UserDetailsEntity userDetails, String verificationCode) {
     Map<String, String> templateArgs = new HashMap<>();
     templateArgs.put("securitytoken", verificationCode);
     templateArgs.put("orgName", appConfig.getOrgName());
     templateArgs.put("contactEmail", appConfig.getContactEmail());
-    templateArgs.put("appName", appName);
+    templateArgs.put("appName", userDetails.getApp().getAppName());
     EmailRequest emailRequest =
         new EmailRequest(
             appConfig.getFromEmail(),

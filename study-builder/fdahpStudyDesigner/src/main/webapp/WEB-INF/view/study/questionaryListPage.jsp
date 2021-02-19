@@ -74,7 +74,8 @@
             <tr>
               <td>${questionnaryInfo.createdDate}</td>
               <td>
-                <div class="dis-ellipsis pr-100">${questionnaryInfo.title}</div>
+                <div class="dis-ellipsis pr-100"
+                     title="${fn:escapeXml(questionnaryInfo.title)}">${questionnaryInfo.title}</div>
               </td>
               <td>${questionnaryInfo.frequency == 'Manually Schedule' ? 'Custom Schedule' :questionnaryInfo.frequency}</td>
               <td style="width:200px !important;">
@@ -239,11 +240,11 @@
                   }
                   $('#alertMsg').show();
                 }
-                setTimeout(hideDisplayMessage, 5000);
+                setTimeout(hideDisplayMessage, 4000);
               },
               error: function (xhr, status, error) {
                 $("#alertMsg").removeClass('s-box').addClass('e-box').text(error);
-                setTimeout(hideDisplayMessage, 5000);
+                setTimeout(hideDisplayMessage, 4000);
               }
             });
           }

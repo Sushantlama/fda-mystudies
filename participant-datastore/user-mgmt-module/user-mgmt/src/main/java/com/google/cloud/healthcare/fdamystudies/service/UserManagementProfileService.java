@@ -37,7 +37,7 @@ public interface UserManagementProfileService {
       String userId, DeactivateAcctBean deactivateBean, AuditLogEventRequest auditRequest);
 
   public EmailResponse resendConfirmationthroughEmail(
-      String applicationId, String securityToken, String emailId, String appName);
+      String applicationId, String securityToken, String emailId);
 
   public void processDeactivatePendingRequests();
 }

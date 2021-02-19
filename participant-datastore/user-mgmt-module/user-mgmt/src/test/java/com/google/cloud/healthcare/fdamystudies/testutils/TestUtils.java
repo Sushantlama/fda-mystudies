@@ -27,7 +27,6 @@ public class TestUtils {
     headers.add("appVersion", "1.0");
     headers.add(Constants.APP_ID_HEADER, Constants.APP_ID_VALUE);
     headers.add("source", PlatformComponent.MOBILE_APPS.getValue());
-    headers.add("appName", Constants.APP_NAME);
 
     if (ArrayUtils.contains(addOptionalHeaderNames, Constants.USER_ID_HEADER)) {
       headers.add(Constants.USER_ID_HEADER, Constants.VALID_USER_ID);

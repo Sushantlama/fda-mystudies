@@ -17,5 +17,5 @@ public interface StudyStateDao {
 
   public String getEnrollTokenForParticipant(String participantRegistryId);
 
-  public String withdrawFromStudy(String participantId, String studyId);
+  public String withdrawFromStudy(String participantId, String studyId, boolean delete);
 }

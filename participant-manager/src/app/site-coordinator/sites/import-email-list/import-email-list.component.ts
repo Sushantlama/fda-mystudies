@@ -13,7 +13,7 @@ import {ImportParticipantEmailResponse} from '../shared/import-participants';
 export class ImportEmailListComponent extends UnsubscribeOnDestroyAdapter {
   @Output() cancel = new EventEmitter();
   @Output()
-  import = new EventEmitter<ImportParticipantEmailResponse>();
+  import: EventEmitter<ImportParticipantEmailResponse> = new EventEmitter<ImportParticipantEmailResponse>();
   @Input() siteId = '';
   fileName = '';
   file?: File;

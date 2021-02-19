@@ -31,8 +31,6 @@ import com.google.cloud.healthcare.fdamystudies.service.UserManagementProfileSer
 import com.google.cloud.healthcare.fdamystudies.util.AppConstants;
 import com.google.cloud.healthcare.fdamystudies.util.MyStudiesUserRegUtil;
 import com.google.cloud.healthcare.fdamystudies.util.ResponseUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import java.sql.Timestamp;
 import java.time.Instant;
 import javax.servlet.http.HttpServletRequest;
@@ -50,10 +48,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(
-    tags = "Verify Email",
-    value = "Verify Email",
-    description = "Operations pertaining to verify email in user management service")
 @RestController
 public class VerifyEmailIdController {
 
@@ -67,7 +61,6 @@ public class VerifyEmailIdController {
 
   @Autowired UserMgmntAuditHelper userMgmntAuditHelper;
 
-  @ApiOperation(value = "verify email Id")
   @PostMapping("/verifyEmailId")
   public ResponseEntity<?> verifyEmailId(
       @Valid @RequestBody EmailIdVerificationForm verificationForm,

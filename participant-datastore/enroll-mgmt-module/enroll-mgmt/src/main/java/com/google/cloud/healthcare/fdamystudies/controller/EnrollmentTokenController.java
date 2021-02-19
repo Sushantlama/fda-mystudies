@@ -30,28 +30,22 @@ import com.google.cloud.healthcare.fdamystudies.util.ErrorCode;
 import com.google.cloud.healthcare.fdamystudies.util.ErrorResponseUtil;
 import com.google.cloud.healthcare.fdamystudies.util.MyStudiesUserRegUtil;
 import com.google.cloud.healthcare.fdamystudies.util.TokenUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.ws.rs.core.Context;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(
-    tags = "Enrollment",
-    value = "enroll management",
-    description = "Operations pertaining to enroll flow in enrollment module")
 @RestController
 public class EnrollmentTokenController {
 
@@ -69,7 +63,6 @@ public class EnrollmentTokenController {
 
   @Autowired StudyStateService studyStateService;
 
-  @ApiOperation(value = "validates enrollment token of the participant ")
   @PostMapping(value = "/validateEnrollmentToken", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> validateEnrollmentToken(
       @RequestHeader("userId") String userId,
@@ -99,14 +92,22 @@ public class EnrollmentTokenController {
             ErrorResponseUtil.ErrorCodes.TOKEN_ALREADY_USE.getValue(),
             response);
         return null;
-      } else if (!enrollManagementUtil.isChecksumValid(enrollmentBean.getToken())
-          || !enrollmentTokenfService.isValidStudyToken(
-              enrollmentBean.getToken(), enrollmentBean.getStudyId(), userId)) {
+      } else if (!enrollManagementUtil.isChecksumValid(enrollmentBean.getToken())) {
         ErrorResponseUtil.getFailureResponse(
             ErrorResponseUtil.ErrorCodes.STATUS_102.getValue(),
             ErrorResponseUtil.ErrorCodes.INVALID_INPUT.getValue(),
             ErrorResponseUtil.ErrorCodes.INVALID_TOKEN.getValue(),
             response);
+        enrollAuditEventHelper.logEvent(ENROLLMENT_TOKEN_FOUND_INVALID, auditRequest);
+        return null;
+      } else if (!enrollmentTokenfService.isValidStudyToken(
+          enrollmentBean.getToken(), enrollmentBean.getStudyId(), userId)) {
+        ErrorResponseUtil.getFailureResponse(
+            ErrorResponseUtil.ErrorCodes.STATUS_102.getValue(),
+            ErrorResponseUtil.ErrorCodes.INVALID_INPUT.getValue(),
+            ErrorResponseUtil.ErrorCodes.UNKNOWN_TOKEN.getValue(),
+            response);
+
         enrollAuditEventHelper.logEvent(ENROLLMENT_TOKEN_FOUND_INVALID, auditRequest);
         return null;
       }
@@ -130,7 +131,6 @@ public class EnrollmentTokenController {
     return new ResponseEntity<>(errorBean, HttpStatus.OK);
   }
 
-  @ApiOperation(value = "enrolling into a study")
   @PostMapping(
       value = "/enroll",
       consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -180,11 +180,11 @@ public class EnrollmentTokenController {
                   ErrorResponseUtil.getFailureResponse(
                       ErrorResponseUtil.ErrorCodes.STATUS_102.getValue(),
                       ErrorResponseUtil.ErrorCodes.INVALID_INPUT.getValue(),
-                      ErrorResponseUtil.ErrorCodes.INVALID_TOKEN.getValue(),
+                      ErrorResponseUtil.ErrorCodes.UNKNOWN_TOKEN.getValue(),
                       response);
                   errorBean = new ErrorBean();
                   errorBean.setCode(HttpStatus.BAD_REQUEST.value());
-                  errorBean.setMessage(ErrorResponseUtil.ErrorCodes.INVALID_TOKEN.getValue());
+                  errorBean.setMessage(ErrorResponseUtil.ErrorCodes.UNKNOWN_TOKEN.getValue());
 
                   return new ResponseEntity<>(errorBean, HttpStatus.BAD_REQUEST);
                 }

@@ -252,8 +252,6 @@
 <script type="text/javascript">
   $(document).ready(function () {
 	$('.studyClass').addClass("active");
-	$(".menuNav li").removeClass('active');
-    $(".fifthComre").addClass('active');
     <c:if test="${actionPage eq 'view'}">
     $('#comprehensionFormId input,textarea,select').prop('disabled', true);
     $('.TestQuestionButtonHide').hide();
@@ -436,13 +434,13 @@
               $("#alertMsg").removeClass('s-box').addClass('e-box').text("Something went Wrong");
             }
           }
-          setTimeout(hideDisplayMessage, 5000);
+          setTimeout(hideDisplayMessage, 4000);
         },
         error: function (xhr, status, error) {
           $(item).prop('disabled', false);
           $('#alertMsg').show();
           $("#alertMsg").removeClass('s-box').addClass('e-box').text("Something went Wrong");
-          setTimeout(hideDisplayMessage, 5000);
+          setTimeout(hideDisplayMessage, 4000);
         }
       });
     } else {
@@ -468,7 +466,7 @@
       $('#alertMsg').show();
       $("#alertMsg").removeClass('s-box').addClass('e-box').text(
           "Please mark at least one of the answer options as the correct answer.");
-      setTimeout(hideDisplayMessage, 5000);
+      setTimeout(hideDisplayMessage, 3000);
       return false;
     }
   }
@@ -504,8 +502,4 @@
     $(item).parent().addClass("has-danger").addClass("has-error");
     $(item).parent().find(".help-block").empty();
   }
-
-  $(document).on('mouseenter', '.dropdown-toggle',  function () {
-      $(this).removeAttr("title");
-  });
 </script>

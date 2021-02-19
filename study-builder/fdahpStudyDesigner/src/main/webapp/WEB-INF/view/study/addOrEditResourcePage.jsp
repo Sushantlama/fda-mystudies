@@ -86,14 +86,14 @@
       <div class="clearfix"></div>
 
       <div>
-        <div class="gray-xs-f mb-xs">Content type
+        <div class="gray-xs-f mb-xs">Content Type
           <span class="requiredStar"> *</span>
         </div>
         <span class="radio radio-info radio-inline p-45">
           <input type="radio" class="addResource" id="inlineRadio1" name="textOrPdfParam"
                  value="0"
                  <c:if test="${not resourceBO.textOrPdf}">checked</c:if>>
-          <label for="inlineRadio1">Rich text editor</label>
+          <label for="inlineRadio1">Rich Text editor</label>
         </span>
         <span class="radio radio-inline">
           <input type="radio" id="inlineRadio2" class="addResource" name="textOrPdfParam"
@@ -140,7 +140,7 @@
         <div class="clearfix"></div>
 
         <div class="mt-xs">
-          <div class="gray-xs-f mb-sm">Set a period of visibility for this resource?
+          <div class="gray-xs-f mb-sm">Set a Period of Visibility for this resource?
             <span
                 class="requiredStar">*
             </span>
@@ -165,17 +165,17 @@
         <div class="clearfix"></div>
 
         <div class="mt-lg resetDate">
-          <div class="gray-xs-f mb-xs">Select time period
+          <div class="gray-xs-f mb-xs">Select Time Period
             <span class="requiredStar">*</span>
           </div>
           <div id="selectTime">
             <span class="radio radio-info radio-inline pr-md">
               <input type="radio" id="inlineRadio5" class="disRadBtn1" value="1"
                      name="resourceTypeParm">
-              <label for="inlineRadio5">Anchor-date based period</label><br/>
+              <label for="inlineRadio5">Anchor Date-based Period</label><br/>
             </span>
             <div>
-              <div class="gray-xs-f col-md-3 col-lg-3 p-none mt-sm">Select anchor date type
+              <div class="gray-xs-f col-md-3 col-lg-3 p-none mt-sm">Select Anchor Date Type
                 <span
                     class="requiredStar">*
                 </span>
@@ -196,7 +196,7 @@
               <div class="clearfix"></div>
             </div>
             <span class="mb-sm pr-md">
-              <span class="light-txt opacity06">Anchor date</span>
+              <span class="light-txt opacity06">Anchor Date</span>
             </span>
             <span>
               <select class="signDropDown selectpicker sign-box" title="Select"
@@ -222,7 +222,7 @@
                 <span
                     style="padding-right:5px;padding-left:5px">to
                 </span>
-                Anchor date
+                Anchor Date
               </span>
             </span>
 
@@ -257,14 +257,14 @@
             <span class="radio radio-info radio-inline pr-md">
               <input type="radio" class="disRadBtn1" id="inlineRadio6" value="0"
                      name="resourceTypeParm">
-              <label for="inlineRadio6">Custom date range</label>
+              <label for="inlineRadio6">Custom Date Range</label>
             </span>
           </div>
           <div>
             <span class="form-group m-none dis-inline vertical-align-middle pr-md">
               <input id="StartDate" type="text"
                      class="form-control disRadBtn1 disBtn2 datepicker remReqOnSave mt-md"
-                     placeholder="Start date" name="startDate"
+                     placeholder="Start Date" name="startDate"
                      value="${resourceBO.startDate}"
                      oldStartDateVal="${resourceBO.startDate}" required/>
               <span class="help-block with-errors red-txt"></span>
@@ -275,7 +275,7 @@
             <span class="form-group m-none dis-inline vertical-align-middle">
               <input id="EndDate" type="text"
                      class="form-control disRadBtn1 disBtn2 datepicker remReqOnSave mt-md"
-                     placeholder="End date" name="endDate" value="${resourceBO.endDate}"
+                     placeholder="End Date" name="endDate" value="${resourceBO.endDate}"
                      oldEndDateVal="${resourceBO.endDate}" required/>
               <span class="help-block with-errors red-txt"></span>
             </span>
@@ -441,13 +441,12 @@
     });
 
     $('#saveResourceId').click(function () {
-    	 var richTextVal = $('#richText').val();
-         if (null != richTextVal && richTextVal != '' && typeof richTextVal != 'undefined' && richTextVal != '<p><br></p>'){
-           var richText=$('#richText').summernote('code');
-           var escaped = $('#richText').text(richText).html();
-           $('#richText').val(escaped);
-          }
-
+    	var richTextVal = $('#richText').val();
+      if (null != richTextVal && richTextVal != '' && typeof richTextVal != 'undefined' && richTextVal != '<p><br></p>'){
+        var richText=$('#richText').summernote('code');
+        var escaped = $('#richText').text(richText).html();
+        $('#richText').val(escaped);
+      }
       $('#saveResourceId').prop('disabled', true);
       $("#resourceTitle").parent().find(".help-block").empty();
       $('#resourceForm').validator('destroy').validator();
@@ -991,8 +990,4 @@
     }
     return isValid;
   }
-
-  $(document).on('mouseenter', '.dropdown-toggle',  function () {
-      $(this).removeAttr("title");
-  });
 </script>

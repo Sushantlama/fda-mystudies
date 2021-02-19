@@ -169,7 +169,6 @@ public class StudiesServicesImpl implements StudiesServices {
 
             if (fcmNotificationResponse.getStatus() == HttpStatus.OK.value()) {
               userMgmntAuditLogHelper.logEvent(PUSH_NOTIFICATION_SENT, auditRequest);
-              logger.info("PUSH_NOTIFICATION_SENT");
             } else {
               userMgmntAuditLogHelper.logEvent(PUSH_NOTIFICATION_FAILED, auditRequest);
             }
@@ -242,9 +241,6 @@ public class StudiesServicesImpl implements StudiesServices {
               notificationBean, appInfobyAppCustomId.get(notificationBean.getAppId()));
     }
     if (allDeviceTokens.get(AppConstants.DEVICE_IOS) != null) {
-      logger.info(
-          "StudiesServicesImpl - sendGatewaylevelNotification() : IOS Device Token -"
-              + allDeviceTokens.get(AppConstants.DEVICE_IOS));
       notificationBean.setDeviceToken(allDeviceTokens.get(AppConstants.DEVICE_IOS));
       pushNotification(notificationBean, appInfobyAppCustomId.get(notificationBean.getAppId()));
     }
@@ -366,8 +362,6 @@ public class StudiesServicesImpl implements StudiesServices {
                 .customField("studyId", notificationBean.getCustomStudyId())
                 .sound("default")
                 .build();
-        logger.info("Json payload" + customPayload);
-        logger.info("tokens" + tokens);
         service.push(tokens, customPayload);
       }
     }

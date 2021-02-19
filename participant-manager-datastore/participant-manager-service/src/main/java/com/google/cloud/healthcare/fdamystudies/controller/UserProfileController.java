@@ -18,8 +18,6 @@ import com.google.cloud.healthcare.fdamystudies.beans.UserProfileResponse;
 import com.google.cloud.healthcare.fdamystudies.common.MessageCode;
 import com.google.cloud.healthcare.fdamystudies.mapper.AuditEventMapper;
 import com.google.cloud.healthcare.fdamystudies.service.UserProfileService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.slf4j.ext.XLogger;
@@ -38,10 +36,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(
-    tags = "User Profile",
-    value = "User profile related api's",
-    description = "Operations pertaining to user profile in participant manager")
 @RestController
 public class UserProfileController {
 
@@ -53,7 +47,6 @@ public class UserProfileController {
 
   @Autowired private UserProfileService userProfileService;
 
-  @ApiOperation(value = "fetch user profile")
   @GetMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<UserProfileResponse> getUserProfile(
       @PathVariable String userId, HttpServletRequest request) {
@@ -64,7 +57,6 @@ public class UserProfileController {
     return ResponseEntity.status(profileResponse.getHttpStatusCode()).body(profileResponse);
   }
 
-  @ApiOperation(value = "fetch user profile by security code")
   @GetMapping(
       value = "/users/securitycodes/{securityCode}",
       produces = MediaType.APPLICATION_JSON_VALUE)
@@ -79,7 +71,6 @@ public class UserProfileController {
     return ResponseEntity.status(userProfileResponse.getHttpStatusCode()).body(userProfileResponse);
   }
 
-  @ApiOperation(value = "update user account details")
   @PutMapping(
       value = "/users/{userId}/profile",
       consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -99,7 +90,6 @@ public class UserProfileController {
     return ResponseEntity.status(userProfileResponse.getHttpStatusCode()).body(userProfileResponse);
   }
 
-  @ApiOperation(value = "set up account by activating user after registration")
   @PostMapping(
       value = "/users/setUpAccount",
       consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -117,7 +107,6 @@ public class UserProfileController {
         .body(setUpAccountResponse);
   }
 
-  @ApiOperation(value = "update user account status")
   @PatchMapping(
       value = "/users/{userId}",
       consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -139,7 +128,6 @@ public class UserProfileController {
     return ResponseEntity.status(deactivateResponse.getHttpStatusCode()).body(deactivateResponse);
   }
 
-  @ApiOperation(value = "delete invitation of the user")
   @DeleteMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> deleteInvitation(
       @RequestHeader(name = "userId") String signedInUserId,

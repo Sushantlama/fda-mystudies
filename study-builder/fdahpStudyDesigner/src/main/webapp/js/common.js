@@ -343,6 +343,12 @@ $(document)
                     }
                   });
 
+          $(document).on("contextmenu", function (e) {
+            e.preventDefault();
+            alert("Right click has been disabled.");
+            return false;
+          });
+
           document.onkeypress = function (event) {
             event = (event || window.event);
             if (event.keyCode == 123) {
@@ -772,7 +778,7 @@ $(document)
                                         "fast");
                                 setTimeout(
                                     hideDisplayMessage,
-                                    5000);
+                                    4000);
                                 $('#password')
                                     .attr(
                                         "type",

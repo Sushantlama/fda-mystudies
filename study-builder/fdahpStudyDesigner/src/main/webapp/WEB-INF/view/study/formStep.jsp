@@ -78,10 +78,10 @@
     <div class="right-content-body pt-none pl-none pr-none">
       <ul class="nav nav-tabs review-tabs gray-bg" id="formTabConstiner">
         <li class="stepLevel active">
-          <a data-toggle="tab" href="#sla">Step-level attributes</a>
+          <a data-toggle="tab" href="#sla">Step-level Attributes</a>
         </li>
         <li class="formLevel">
-          <a data-toggle="tab" href="#fla">Form-level attributes</a>
+          <a data-toggle="tab" href="#fla">Form-level Attributes</a>
         </li>
       </ul>
       <div class="tab-content pl-xlg pr-xlg">
@@ -102,7 +102,7 @@
         <div id="sla" class="tab-pane fade in active mt-xlg">
           <div class="row">
             <div class="col-md-6 pl-none">
-              <div class="gray-xs-f mb-xs">Step title or key (1 to 15 characters)
+              <div class="gray-xs-f mb-xs">Step title or Key (1 to 15 characters)
                 <span
                     class="requiredStar">*
                 </span>
@@ -122,12 +122,12 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="gray-xs-f mb-xs">Step type</div>
-              <div>Form step</div>
+              <div class="gray-xs-f mb-xs">Step Type</div>
+              <div>Form Step</div>
             </div>
             <div class="clearfix"></div>
             <div>
-              <div class="gray-xs-f mb-xs">Is this a skippable step?
+              <div class="gray-xs-f mb-xs">Is this a Skippable Step?
                 <span
                     class="ml-xs sprites_v3 filled-tooltip" data-toggle="tooltip"
                     title="If marked as Yes, it means the user can skip the entire step meaning no responses are captured from this form step. If marked No, it means the user cannot skip the step and has to answer at least one of the questions to proceed."></span>
@@ -148,7 +148,7 @@
             <div class="clearfix"></div>
             <c:if test="${questionnaireBo.branching}">
               <div class="col-md-4 col-lg-3 p-none mt-md">
-                <div class="gray-xs-f mb-xs">Default destination step
+                <div class="gray-xs-f mb-xs">Default Destination Step
                   <span
                       class="requiredStar">*
                   </span>
@@ -194,7 +194,7 @@
             </div>
           </div>
           <div>
-            <div class="gray-xs-f mb-xs mt-md">Repeatable form button text (1 to 30 characters)
+            <div class="gray-xs-f mb-xs mt-md">Repeatable Form Button text (1 to 30 characters)
             </div>
             <div class="gray-xs-f mb-xs">
               <small>Enter text the user should see and tap on, to repeat
@@ -222,7 +222,7 @@
               <div class="dis-line form-group mb-md pull-right">
                 <button type="button"
                         class="btn btn-primary  blue-btn hideButtonOnView <c:if test="${empty questionnairesStepsBo.stepId}"> cursor-none </c:if>"
-                        onclick="addNewQuestion('');" id="addQuestionId">Add new question
+                        onclick="addNewQuestion('');" id="addQuestionId">Add New Question
                 </button>
               </div>
             </div>
@@ -237,7 +237,8 @@
                     </td>
                     <td>
                       <div>
-                        <div class="dis-ellipsis">${entry.value.title}</div>
+                        <div class="dis-ellipsis"
+                             title="${fn:escapeXml(entry.value.title)}">${entry.value.title}</div>
                       </div>
                     </td>
                     <td>
@@ -329,7 +330,7 @@
                 $('#alertMsg').show();
                 $("#alertMsg").removeClass('s-box').addClass('e-box').text(
                     "Add atleast one question");
-                setTimeout(hideDisplayMessage, 5000);
+                setTimeout(hideDisplayMessage, 4000);
                 $('.formLevel a').tab('show');
               } else {
                 var repeatable = $('input[name="repeatable"]:checked').val();
@@ -357,7 +358,7 @@
                           $('#alertMsg').show();
                           $("#alertMsg").removeClass('s-box').addClass('e-box').text(
                               "Add atleast one question");
-                          setTimeout(hideDisplayMessage, 5000);
+                          setTimeout(hideDisplayMessage, 4000);
                           $('.formLevel a').tab('show');
                         }
                       }
@@ -374,7 +375,7 @@
                       $('#alertMsg').show();
                       $("#alertMsg").removeClass('s-box').addClass('e-box').text(
                           "Add atleast one question");
-                      setTimeout(hideDisplayMessage, 5000);
+                      setTimeout(hideDisplayMessage, 4000);
                       $('.formLevel a').tab('show');
                     }
                   }
@@ -504,11 +505,11 @@
               $("#alertMsg").removeClass('s-box').addClass('e-box').text(
                   "Unable to reorder consent");
             }
-            setTimeout(hideDisplayMessage, 5000);
+            setTimeout(hideDisplayMessage, 4000);
           },
           error: function (xhr, status, error) {
             $("#alertMsg").removeClass('s-box').addClass('e-box').text(error);
-            setTimeout(hideDisplayMessage, 5000);
+            setTimeout(hideDisplayMessage, 4000);
           }
         });
       }
@@ -645,13 +646,13 @@
             if (callback)
               callback(false);
           }
-          setTimeout(hideDisplayMessage, 5000);
+          setTimeout(hideDisplayMessage, 4000);
         },
         error: function (xhr, status, error) {
           $(item).prop('disabled', false);
           $('#alertMsg').show();
           $("#alertMsg").removeClass('s-box').addClass('e-box').text("Something went Wrong");
-          setTimeout(hideDisplayMessage, 5000);
+          setTimeout(hideDisplayMessage, 4000);
         }
       });
     }
@@ -720,11 +721,11 @@
                   }
                   $('#alertMsg').show();
                 }
-                setTimeout(hideDisplayMessage, 5000);
+                setTimeout(hideDisplayMessage, 4000);
               },
               error: function (xhr, status, error) {
                 $("#alertMsg").removeClass('s-box').addClass('e-box').text(error);
-                setTimeout(hideDisplayMessage, 5000);
+                setTimeout(hideDisplayMessage, 4000);
               }
             });
           } else {
@@ -910,8 +911,4 @@
       callback(false);
     }
   }
-
-  $(document).on('mouseenter', '.dropdown-toggle',  function () {
-      $(this).removeAttr("title");
-});
 </script>

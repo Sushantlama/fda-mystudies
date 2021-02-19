@@ -20,8 +20,6 @@ import com.google.cloud.healthcare.fdamystudies.exceptions.ErrorCodeException;
 import com.google.cloud.healthcare.fdamystudies.mapper.AuditEventMapper;
 import com.google.cloud.healthcare.fdamystudies.service.SiteService;
 import com.google.cloud.healthcare.fdamystudies.service.StudyService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.apache.commons.lang3.ArrayUtils;
@@ -39,10 +37,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(
-    tags = "Studies",
-    value = "Study related api's",
-    description = "Operations pertaining to Studies in participant manager")
 @RestController
 @RequestMapping("/studies")
 public class StudyController {
@@ -64,7 +58,6 @@ public class StudyController {
    * @param request
    * @return
    */
-  @ApiOperation(value = "fetch a list of studies for which user have permissions")
   @GetMapping
   public ResponseEntity<StudyResponse> getStudies(
       @RequestHeader(name = USER_ID_HEADER) String userId,
@@ -78,7 +71,6 @@ public class StudyController {
     return ResponseEntity.status(studyResponse.getHttpStatusCode()).body(studyResponse);
   }
 
-  @ApiOperation(value = "fetch study participant details")
   @GetMapping(
       value = "{studyId}/participants",
       produces = MediaType.APPLICATION_JSON_VALUE,
@@ -122,7 +114,6 @@ public class StudyController {
         .body(participantRegistryResponse);
   }
 
-  @ApiOperation(value = "update target enrollment for the study")
   @PatchMapping(
       value = "/{studyId}/targetEnrollment",
       produces = MediaType.APPLICATION_JSON_VALUE,

@@ -51,7 +51,6 @@
                   id="fname"
                   placeholder="Enter first name"
                   formControlName="firstName"
-                  pattern="^[A-Za-z0-9*()_+|:.-]*$"
                 />
                 <div
                   class="validation-error"
@@ -66,13 +65,6 @@
                   >
                     Enter a first name
                   </span>
-                  <span
-                    class="help-block with-errors error__msg"
-                    *ngIf="f.firstName.errors?.pattern"
-                  >
-                    Please use characters from the following set only: A-Z a-z
-                    0-9 *()_+|:.-
-                  </span>
                 </div>
               </div>
             </div>
@@ -85,7 +77,6 @@
                   id="lname"
                   placeholder="Enter last name"
                   formControlName="lastName"
-                  pattern="^[A-Za-z0-9*()_+|:.-]*$"
                 />
                 <div
                   class="validation-error"
@@ -100,13 +91,6 @@
                   >
                     Enter a last name
                   </span>
-                  <span
-                    class="help-block with-errors error__msg"
-                    *ngIf="f.lastName.errors?.pattern"
-                  >
-                    Please use characters from the following set only: A-Z a-z
-                    0-9 *()_+|:.-
-                  </span>
                 </div>
               </div>
             </div>
@@ -120,67 +104,20 @@
             <div class="form-group">
               <label for="password">Password</label>
               <input
-                [type]="fieldTextType ? 'text' : 'password'"
+                type="password"
                 class="form-control"
                 id="password"
                 placeholder="Enter password"
                 formControlName="password"
               />
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i
-                    class="fa"
-                    [ngClass]="{
-                      'fa-eye-slash': !fieldTextType,
-                      'fa-eye': fieldTextType
-                    }"
-                    (click)="toggleFieldTextType()"
-                  ></i>
-                </span>
-              </div>
 
               <div
-                class="validation-error help-block with-errors error__msg"
+                class="validation-error"
                 *ngIf="
                   f.password.invalid && (f.password.dirty || f.password.touched)
                 "
               >
-                <div *ngIf="f.password.dirty">
-                  <meter
-                    low="{{ passwordMeterLow }}"
-                    optimum="{{ passwordMeterOptimum }}"
-                    high="{{ passwordMeterHigh }}"
-                    value="{{ passwordMeterValue }}"
-                  ></meter>
-                  <span
-                    [ngClass]="
-                      meterStatus == 'Weak'
-                        ? 'weakPwd'
-                        : meterStatus == 'Fair'
-                        ? 'fairPwd'
-                        : meterStatus == 'Good'
-                        ? 'goodPwd'
-                        : 'strongPwd'
-                    "
-                  >
-                    {{ meterStatus }}
-                  </span>
-                </div>
-                <div *ngIf="f.password.errors?.passwordlength">
-                  {{ passwordLength }}
-                </div>
-                <div
-                  *ngIf="f.password.errors?.consecutiveCharacterorwhitespace"
-                >
-                  {{ consecutiveCharacter }}
-                </div>
-                <div *ngIf="f.password.errors?.firstNameUseError">
-                  {{ userName }}
-                </div>
-                <div *ngIf="f.password.errors?.serviceNameError">
-                  {{ serviceName }}
-                </div>
-                <!-- <span
+                <span
                   class="help-block with-errors error__msg"
                   *ngIf="f.password.errors?.validPassword"
                 >
@@ -192,7 +129,7 @@
                   *ngIf="f.password.errors?.required"
                 >
                   Enter a password
-                </span> -->
+                </span>
               </div>
             </div>
           </div>

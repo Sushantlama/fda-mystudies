@@ -28,6 +28,8 @@ public class SettingsBean {
 
   private String platform = "";
 
+  private boolean rejoin = false;
+
   public boolean isEnrolling() {
     return enrolling;
   }
@@ -42,5 +44,13 @@ public class SettingsBean {
 
   public void setPlatform(String platform) {
     this.platform = platform;
+  }
+
+  public boolean isRejoin() {
+    return rejoin;
+  }
+
+  public void setRejoin(boolean rejoin) {
+    this.rejoin = rejoin;
   }
 }

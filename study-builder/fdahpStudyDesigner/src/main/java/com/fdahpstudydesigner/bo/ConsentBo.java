@@ -48,6 +48,9 @@ public class ConsentBo implements Serializable {
 
   private static final long serialVersionUID = 5564057544960167010L;
 
+  @Column(name = "aggrement_of_consent")
+  private String aggrementOfTheConsent;
+
   @Column(name = "allow_without_permission")
   private String allowWithoutPermission = "No";
 
@@ -131,6 +134,10 @@ public class ConsentBo implements Serializable {
 
   @Column(name = "version")
   private Float version = 0f;
+
+  public String getAggrementOfTheConsent() {
+    return aggrementOfTheConsent;
+  }
 
   public String getAllowWithoutPermission() {
     return allowWithoutPermission;
@@ -242,6 +249,10 @@ public class ConsentBo implements Serializable {
 
   public Float getVersion() {
     return version;
+  }
+
+  public void setAggrementOfTheConsent(String aggrementOfTheConsent) {
+    this.aggrementOfTheConsent = aggrementOfTheConsent;
   }
 
   public void setAllowWithoutPermission(String allowWithoutPermission) {

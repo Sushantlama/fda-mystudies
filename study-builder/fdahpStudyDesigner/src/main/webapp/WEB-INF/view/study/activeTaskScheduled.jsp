@@ -37,7 +37,7 @@
 
   .help-block ul {
     width: 150px;
-   /* font-size: 10 px !important; */
+  / / font-size: 10 px !important;
   }
 .tool-tip {
     display: inline-block;
@@ -47,10 +47,10 @@
     pointer-events: none;
   }
    
-
+  .display_inl_tbl { display: inline-table !important; } 
  
 </style>
-<div class="gray-xs-f mb-sm">Active task schedule type</div>
+<div class="gray-xs-f mb-sm">Active Task Schedule Type</div>
 <div class="pb-lg ">
   <span class="radio radio-info radio-inline p-40">
     <input type="radio" id="schedule1" class="typeofschedule" scheduletype="Regular"
@@ -73,7 +73,7 @@
            data-toggle="validator">
   <div class="anchortypeclass" style="display:none;">
     <c:if test="${fn:length(anchorTypeList) gt 0}">
-      <div class="gray-xs-f mb-sm">Select anchor date type</div>
+      <div class="gray-xs-f mb-sm">Select Anchor Date Type</div>
       <div class="clearfix"></div>
       <div class="col-md-5 col-lg-5 p-none">
         <div class="form-group">
@@ -94,7 +94,7 @@
   </div>
 </form:form>
 <!-- Ancor date type -->
-<div class="gray-xs-f mb-sm">Active task scheduling options</div>
+<div class="gray-xs-f mb-sm">Active Task Scheduling Options</div>
 <div class="pb-lg b-bor">
   <span class="radio radio-info radio-inline p-40">
     <input type="radio" id="oneTimeRadio1" class="schedule" frequencytype="oneTime"
@@ -121,7 +121,7 @@
     <input type="radio" id="manuallyRadio5" class="schedule" frequencytype="manually"
            value="Manually Schedule"
            name="frequency" ${activeTaskBo.frequency=='Manually Schedule' ?'checked':''} ${(activeTaskBo.isDuplicate > 0)?'disabled' : ''}>
-    <label for="manuallyRadio5">Custom schedule</label>
+    <label for="manuallyRadio5">Custom Schedule</label>
   </span>
 </div>
 <!-- One time Section-->
@@ -163,7 +163,7 @@
         <!-- Anchordate start-->
         <div class="mt-none resetDate">
           <div>
-            <span class="pr-md">Anchor date</span>
+            <span class="pr-md">Anchor Date</span>
             <span>
               <select
                   class="signDropDown selectpicker sign-box ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
@@ -211,7 +211,7 @@
                      name="activeTaskFrequenciesBo.frequencyTime"
                      value="${activeTaskBo.activeTaskFrequenciesBo.frequencyTime}"  <c:if
                   test="${activeTaskBo.activeTaskFrequenciesBo.isLaunchStudy}"> disabled </c:if>
-                     placeholder="Select time"/>
+                     placeholder="Select Time"/>
               <span class='help-block with-errors red-txt'></span>
             </span>
           </div>
@@ -222,7 +222,7 @@
         <span class="form-group m-none dis-inline vertical-align-middle pr-md">
           <input id="chooseDate" type="text"
                  class="mt-sm form-control calendar ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
-                 name="activeTaskFrequenciesBo.frequencyDate" placeholder="Choose date"
+                 name="activeTaskFrequenciesBo.frequencyDate" placeholder="Choose Date"
                  value="${activeTaskBo.activeTaskFrequenciesBo.frequencyDate}" required <c:if
               test="${activeTaskBo.activeTaskFrequenciesBo.isLaunchStudy}"> disabled </c:if> />
           <span class='help-block with-errors red-txt'></span>
@@ -233,7 +233,7 @@
                  name="activeTaskFrequenciesBo.frequencyTime"
                  value="${activeTaskBo.activeTaskFrequenciesBo.frequencyTime}" required <c:if
               test="${activeTaskBo.activeTaskFrequenciesBo.isLaunchStudy}"> disabled </c:if>
-                 placeholder="Select time"/>
+                 placeholder="Select Time"/>
           <span class='help-block with-errors red-txt'></span>
         </span>
       </div>
@@ -248,7 +248,7 @@
         <input type="checkbox" id="isStudyLifeTime" name="activeTaskFrequenciesBo.isStudyLifeTime"
                value="true" ${activeTaskBo.activeTaskFrequenciesBo.isStudyLifeTime ?'checked':''} ${(activeTaskBo.isDuplicate > 0)?'disabled' : ''}
                required="required">
-        <label for="isStudyLifeTime"> Study lifetime</label>
+        <label for="isStudyLifeTime"> Study Lifetime</label>
       </span>
       <div class="mt-md form-group regularClass">
         <span class="form-group m-none dis-inline vertical-align-middle pr-md">
@@ -258,13 +258,13 @@
                 type="text"
                 class="form-control calendar ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
                 name="activeTaskLifetimeEnd"
-                placeholder="Choose end date"
+                placeholder="Choose End Date"
                 required <c:if
                 test="${activeTaskBo.activeTaskFrequenciesBo.isStudyLifeTime }"> disabled </c:if>
                 value=""/></c:when>
             <c:otherwise><input id="chooseEndDate" type="text"
                                 class="form-control calendar ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
-                                name="activeTaskLifetimeEnd" placeholder="Choose end date"
+                                name="activeTaskLifetimeEnd" placeholder="Choose End Date"
                                 required <c:if
                 test="${activeTaskBo.activeTaskFrequenciesBo.isStudyLifeTime }"> disabled </c:if>
                                 value="${activeTaskBo.activeTaskLifetimeEnd}"/></c:otherwise>
@@ -279,7 +279,7 @@
         <!-- Anchordate start-->
         <div class="mt-none resetDate">
           <div>
-            <span class="pr-md">Anchor date</span>
+            <span class="pr-md">Anchor Date</span>
             <span>
               <select
                   class="signDropDown selectpicker sign-box ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
@@ -355,7 +355,7 @@
           <br/>
           <input id="startDate" type="text"
                  class="form-control mt-sm calendar ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
-                 placeholder="Choose date" required name="activeTaskLifetimeStart"
+                 placeholder="Choose Date" required name="activeTaskLifetimeStart"
                  value="${activeTaskBo.activeTaskLifetimeStart}"/>
           <span class='help-block with-errors red-txt'></span>
         </span>
@@ -369,7 +369,7 @@
                 <span class="requiredStar">*</span>
               </span>
               <br/>
-              <span class="pr-md">Anchor date</span>
+              <span class="pr-md">Anchor Date</span>
               <span>
                 <select
                     class="signDropDown selectpicker sign-box ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
@@ -413,7 +413,7 @@
           <br/>
           <input id="days" type="text"
                  class="form-control mt-sm numChk ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
-                 name="repeatActiveTask" placeholder="No of times" required
+                 name="repeatActiveTask" placeholder="No of Times" required
                  value="${activeTaskBo.repeatActiveTask}"
                  onkeypress="return isNumber(event, this)"
                  pattern="^(0{0,2}[1-9]|0?[1-9][0-9]|[1-9][0-9][0-9])$"
@@ -424,7 +424,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="mt-md">
-      <div class="gray-xs-f mb-xs">End date
+      <div class="gray-xs-f mb-xs">End Date
         <span class="ml-xs sprites_v3 filled-tooltip Selectedtooltip"
               data-toggle="tooltip"
               data-placement="bottom"
@@ -573,7 +573,7 @@
           <input id="startWeeklyDate" type="text"
                  class="form-control mt-sm calendar ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
                  required
-                 name="activeTaskLifetimeStart" placeholder="Choose date"
+                 name="activeTaskLifetimeStart" placeholder="Choose Date"
                  value="${activeTaskBo.activeTaskLifetimeStart}" readonly="readonly"/>
           <span class='help-block with-errors red-txt'></span>
         </span>
@@ -587,7 +587,7 @@
                 <span class="requiredStar">*</span>
               </span>
               <br/>
-              <span class="pr-md">Anchor date</span>
+              <span class="pr-md">Anchor Date</span>
               <span>
                 <select
                     class="signDropDown selectpicker sign-box ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
@@ -638,7 +638,7 @@
             <br/>
             <input id="weeksAnchor" type="text"
                    class="form-control mt-sm numChk ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
-                   name="repeatActiveTask" placeholder="No of times"
+                   name="repeatActiveTask" placeholder="No of Times"
                    value="${activeTaskBo.repeatActiveTask}" required
                    onkeypress="return isNumber(event, this)"
                    pattern="^(0{0,2}[1-9]|0?[1-9][0-9]|[1-9][0-9][0-9])$"
@@ -659,7 +659,7 @@
           <br/>
           <input id="weeks" type="text"
                  class="form-control mt-sm numChk ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
-                 name="repeatActiveTask" placeholder="No of times"
+                 name="repeatActiveTask" placeholder="No of Times"
                  value="${activeTaskBo.repeatActiveTask}" required
                  onkeypress="return isNumber(event, this)"
                  pattern="^(0{0,2}[1-9]|0?[1-9][0-9]|[1-9][0-9][0-9])$"
@@ -670,7 +670,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="mt-md">
-      <div class="gray-xs-f mb-xs">End date
+      <div class="gray-xs-f mb-xs">End Date
         <span
             class="ml-xs sprites_v3 filled-tooltip Selectedtooltip"
             data-toggle="tooltip"
@@ -709,7 +709,7 @@
   <input type="hidden" name="type" id="type" value="schedule">
   <div class="month all mt-lg dis-none">
     <div id="monthlyDateId">
-      <span class="gray-xs-f">Select date/time (of the month)
+      <span class="gray-xs-f">Select Date/Time (of the month)
         <span
             class="requiredStar"> *
         </span>
@@ -726,7 +726,7 @@
           <input id="startDateMonthly" type="text"
                  class="form-control mt-sm calendar ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
                  required
-                 placeholder="Choose date" name="activeTaskFrequenciesBo.frequencyDate"
+                 placeholder="Choose Date" name="activeTaskFrequenciesBo.frequencyDate"
                  value="${activeTaskBo.activeTaskFrequenciesBo.frequencyDate}"/>
           <span class='help-block with-errors red-txt'></span>
         </span>
@@ -760,7 +760,7 @@
           <br/>
           <input id="pickStartDate" type="text"
                  class="form-control mt-sm calendar ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
-                 placeholder="Choose start date" required name="activeTaskLifetimeStart"
+                 placeholder="Choose Start Date" required name="activeTaskLifetimeStart"
                  value="${activeTaskBo.activeTaskLifetimeStart}" readonly="readonly"/>
           <span class='help-block with-errors red-txt'></span>
         </span>
@@ -776,7 +776,7 @@
                 </span>
               </span>
               <br/>
-              <span class="pr-md">Anchor date</span>
+              <span class="pr-md">Anchor Date</span>
               <span>
                 <select
                     class="signDropDown selectpicker sign-box ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
@@ -831,7 +831,7 @@
             <br/>
             <input id="monthsAnchor" type="text"
                    class="form-control mt-sm numChk ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
-                   name="repeatActiveTask" placeholder="No of times" required
+                   name="repeatActiveTask" placeholder="No of Times" required
                    value="${activeTaskBo.repeatActiveTask}"
                    onkeypress="return isNumber(event, this)"
                    pattern="^(0{0,2}[1-9]|0?[1-9][0-9]|[1-9][0-9][0-9])$"
@@ -853,7 +853,7 @@
           <br/>
           <input id="months" type="text"
                  class="form-control mt-sm numChk ${(activeTaskBo.isDuplicate > 0)?'cursor-none' : ''}"
-                 name="repeatActiveTask" placeholder="No of times" required
+                 name="repeatActiveTask" placeholder="No of Times" required
                  value="${activeTaskBo.repeatActiveTask}" onkeypress="return isNumber(event, this)"
                  pattern="^(0{0,2}[1-9]|0?[1-9][0-9]|[1-9][0-9][0-9])$"
                  data-pattern-error="Please enter valid number." maxlength="3"/>
@@ -863,7 +863,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="mt-md col-md-12 p-none">
-      <div class="gray-xs-f mb-xs">End date
+      <div class="gray-xs-f mb-xs">End Date
         <span
             class="ml-xs sprites_v3 filled-tooltip Selectedtooltip"
             data-toggle="tooltip"
@@ -905,8 +905,8 @@
         <div class="manually-option mb-md form-group" id="0">
           <input type="hidden" name="activeTaskCustomScheduleBo[0].activeTaskId" id="activeTaskId"
                  class="activeTaskIdClass" value="${activeTaskBo.id}">
-                 
-                  <div class="gray-xs-f mb-sm">Select a date range and a start and end time for each run of the activity
+                  <span class="display_inl_tbl">
+                  <div class="gray-xs-f mb-sm">Select a date range
                     <span class="requiredStar"> *</span>
                     <span
                        class="ml-xs sprites_v3 filled-tooltip Selectedtooltip"
@@ -919,7 +919,7 @@
             <input id="StartDate0" type="text" count='0'
                    class="form-control calendar customCalnder cusStrDate"
                    name="activeTaskCustomScheduleBo[0].frequencyStartDate" value=""
-                   placeholder="Start date"
+                   placeholder="Start Date"
                    onclick='customStartDate(this.id,0);' required/>
             <span class='help-block with-errors red-txt'></span>
           </span>
@@ -929,11 +929,22 @@
           <span class="form-group dis-inline vertical-align-middle pr-md">
             <input id="EndDate0" type="text" count='0'
                    class="form-control calendar customCalnder cusEndDate"
-                   name="activeTaskCustomScheduleBo[0].frequencyEndDate" placeholder="End date"
+                   name="activeTaskCustomScheduleBo[0].frequencyEndDate" placeholder="End Date"
                    onclick='customEndDate(this.id,0);' required/>
             <span class='help-block with-errors red-txt'></span>
             </span>            
-           
+             </span>
+            <span class="display_inl_tbl">
+            <div class="gray-xs-f mb-sm">Select a time
+                <span class="requiredStar"> *</span>
+           <span
+          class="ml-xs sprites_v3 filled-tooltip Selectedtooltip"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Selected dates and times will work as per the mobile device time. Selections of dates or times in the past (as per the server timezone which is ${server_timezone}) is not allowed.">
+      </span>
+    </div>
+         
           <span class="form-group dis-inline vertical-align-middle pr-md">
             <input id="customTime0" type="text" count='0' class="form-control clock cusTime"
                    name="activeTaskCustomScheduleBo[0].frequencyTime" placeholder="Time"
@@ -942,14 +953,14 @@
             <span class='help-block with-errors red-txt'></span>
           </span>
           <span class="addBtnDis addbtn mr-sm align-span-center" onclick='addDate();'>+</span>
-          
+          </span>
         </div>
       </c:if>
       <c:if test="${fn:length(activeTaskBo.activeTaskCustomScheduleBo) gt 0}">
         <c:forEach items="${activeTaskBo.activeTaskCustomScheduleBo}"
                    var="activeTaskCustomScheduleBo"
                    varStatus="customVar">
-          <div class="manually-option mb-md form-group" id="RegDate${customVar.index}">
+          <div class="manually-option mb-md form-group" id="${customVar.index}">
             <input type="hidden" name="activeTaskCustomScheduleBo[${customVar.index}].id" id="id"
                    value="${activeTaskCustomScheduleBo.id}">
             <input type="hidden" name="activeTaskCustomScheduleBo[${customVar.index}].used"
@@ -960,7 +971,7 @@
               <input id="StartDate${customVar.index}" type="text" count='${customVar.index}'
                      class="form-control calendar cusStrDate ${activeTaskCustomScheduleBo.used ?'cursor-none' : ''}"
                      name="activeTaskCustomScheduleBo[${customVar.index}].frequencyStartDate"
-                     value="${activeTaskCustomScheduleBo.frequencyStartDate}" placeholder="Start date"
+                     value="${activeTaskCustomScheduleBo.frequencyStartDate}" placeholder="Start Date"
                      onclick='customStartDate(this.id,${customVar.index});' required/>
               <span class='help-block with-errors red-txt'></span>
             </span>
@@ -971,7 +982,7 @@
               <input id="EndDate${customVar.index}" type="text" count='${customVar.index}'
                      class="form-control calendar cusEndDate ${activeTaskCustomScheduleBo.used ?'cursor-none' : ''}"
                      name="activeTaskCustomScheduleBo[${customVar.index}].frequencyEndDate"
-                     value="${activeTaskCustomScheduleBo.frequencyEndDate}" placeholder="End date"
+                     value="${activeTaskCustomScheduleBo.frequencyEndDate}" placeholder="End Date"
                      onclick='customEndDate(this.id,${customVar.index});' required/>
               <span class='help-block with-errors red-txt'></span>
             </span>
@@ -984,8 +995,7 @@
                      required/>
               <span class='help-block with-errors red-txt'></span>
             </span>
-            <span id="AddButton"
-                  class="addbtn addBtnDis align-span-center mr-md " onclick="addDate();">+</span>
+            <span class="addbtn addBtnDis align-span-center mr-md " onclick="addDate();">+</span>
             <span id="delete"
                   class="sprites_icon delete vertical-align-middle remBtnDis hide align-span-center ${activeTaskCustomScheduleBo.used ?'cursor-none' : ''}"
                   onclick="removeDate(this);"></span>
@@ -1001,9 +1011,9 @@
           <input type="hidden" name="activeTaskCustomScheduleBo[0].activeTaskId" id="activeTaskId"
                  class="activeTaskIdClass" value="${activeTaskBo.id}">
                  
-                 
-            <div class="gray-xs-f">
-             Select a date range and a start and end time for each run of the activity
+                  <span class="display_inl_tbl">
+                          <div class="gray-xs-f">
+              Select a date range
               <span class="requiredStar">*</span>
               <span
                   class="ml-xs sprites_v3 filled-tooltip Selectedtooltip"
@@ -1015,7 +1025,7 @@
             
           <span class="mb-sm pr-md">
             <span class="light-txt opacity06">
-              Anchor date
+              Anchor Date
             </span>
           </span>
           <span>
@@ -1080,8 +1090,18 @@
             </span>
           </span>
           
-              
-                
+               </span>
+                 <span class="display_inl_tbl">
+                          <div class="gray-xs-f mb-xs">
+              Select a time
+              <span class="requiredStar">*</span>
+              <span
+                  class="ml-xs sprites_v3 filled-tooltip Selectedtooltip"
+                  data-toggle="tooltip"
+                  data-placement="bottom"
+                  title="Selected dates and times will work as per the mobile device time. Selections of dates or times in the past (as per the server timezone which is ${server_timezone}) is not allowed.">
+              </span>
+            </div>
             
           <span class="form-group  dis-inline vertical-align-middle pr-md"
                 style="margin-bottom: -13px"><input id="manualTime0"
@@ -1095,7 +1115,7 @@
           <span class="addbtn addBtnDis dis-inline vertical-align-middle "
                 onclick="addDateAnchor();">+
           </span>
-          
+          </span>
         </div>
       </c:if>
       <c:if
@@ -1103,7 +1123,7 @@
         <c:forEach items="${activeTaskBo.activeTaskCustomScheduleBo}"
                    var="activeTaskCustomScheduleBo" varStatus="customVar">
           <div class="manually-anchor-option mb-md form-group"
-               id="AnchorDate${customVar.index}">
+               id="${customVar.index}">
             <input type="hidden" name="activeTaskCustomScheduleBo[${customVar.index}].id" id="id"
                    value="${activeTaskCustomScheduleBo.id}">
             <input type="hidden" name="activeTaskCustomScheduleBo[${customVar.index}].used"
@@ -1112,7 +1132,7 @@
                    id="activeTaskId" value="${activeTaskCustomScheduleBo.activeTaskId}">
             <span class="mb-sm pr-md">
               <span
-                  class="light-txt opacity06"> Anchor date
+                  class="light-txt opacity06"> Anchor Date
               </span>
             </span>
             <span>
@@ -1229,115 +1249,22 @@
     $('.selectpicker').selectpicker('refresh');
     $('[data-toggle="tooltip"]').tooltip();
 
-    if ($('.dailyTimeDiv').length == 1) {
-	   	 $('.dailyTimeDiv').find(".delete").css("visibility", "hidden");
-	     }
-   if($('.manually-option').length == 1){
- 	  $('.manually-option').find(".delete").css("visibility", "hidden");
-   }
-
-  if($('.manually-anchor-option').length == 1){
-	  $('.manually-anchor-option').find(".delete").css("visibility", "hidden");
-  }
-   
     if ($("#schedule2").prop("checked")) {
-    	 var schedule_opts = $("input[name='frequency']:checked").val();
-    	 
-    	  $("#weekDaysId").hide();
-        $("#weekDaysId").find('input:text').removeAttr('required', true);
-        $(".weeklyRegular").hide();
-        $(".weeklyRegular").removeAttr('required');
-
-        $("#monthlyDateId").hide();
-        $("#monthlyDateId").find('input:text').removeAttr('required', true);
-        $(".monthlyRegular").hide();
-        $(".monthlyRegular").removeAttr('required');
-
-        $("#activeMonthlyRegular").hide();
-        $("#months").removeAttr('required');
-
-        localStorage.setItem("IsActiveAnchorDateSelected", "true");
-        localStorage.setItem("IsActiveRegularSelected", "false");
-
-        if (schedule_opts == 'One time') {
-          $(".onetimeanchorClass").show();
-          $(".onetimeanchorClass").find('input:text').attr('required', true);
-        }
-        if (schedule_opts == 'Daily') {
-          $(".dailyanchorDiv").show();
-          $(".dailyanchorDiv").find('input:text').attr('required', true);
-        }
-        if (schedule_opts == 'Weekly') {
-          $(".weeklyanchorDiv").show();
-          $(".weeklyanchorDiv").find('input:text').attr('required', true);
-        }
-        if (schedule_opts == 'Monthly') {
-          $(".monthlyanchorDiv").show();
-          $(".monthlyanchorDiv").find('input:text').attr('required', true);
-        }
-        if (schedule_opts == 'Manually Schedule') {
-          $(".manuallyAnchorContainer").show();
-          $(".manuallyAnchorContainer").find('input:text').attr('required', true);
-        }
-        $('.regularClass').hide();
-        $('.regularClass').find('input:text').removeAttr('required');
-        $('.anchortypeclass').show();
-        $('.anchortypeclass').find('input:select').attr('required', true);
-        $('.selectpicker').selectpicker('refresh');
-        $('.dailyStartCls').hide();
-        $('.dailyStartCls').find('input:text').removeAttr('required');
-        $('.weeklyStartCls').hide();
-        $('.weeklyStartCls').find('input:text,select').removeAttr('required');
-        $('.monthlyStartCls').hide();
-        $('.monthlyStartCls').find('input:text').removeAttr('required');
-        $(".manuallyContainer").hide();
-        $(".manuallyContainer").find('input:text').removeAttr('required');
-        $(".Selectedtooltip").hide();
-
+      $("#weekDaysId").hide();
+      $(".weeklyRegular").hide();
+      $("#monthlyDateId").hide();
+      $(".monthlyRegular").hide();
+      $("#activeMonthlyRegular").hide();
+      localStorage.setItem("IsActiveAnchorDateSelected", "true");
+      localStorage.setItem("IsActiveRegularSelected", "false");
     } else {
-    	localStorage.setItem("IsActiveAnchorDateSelected", "false");
-        localStorage.setItem("IsActiveRegularSelected", "true");
-
-        $("#weekDaysId").show();
-        $("#weekDaysId").attr('required', true);
-
-        $(".weeklyRegular").show();
-        $(".weeklyRegular").attr('required');
-
-        $("#monthlyDateId").show();
-        $("#monthlyDateId").attr('required', true);
-
-        $("#activeMonthlyRegular").show();
-        $("#months").attr('required', true);
-
-        $(".onetimeanchorClass").hide();
-        $('.onetimeanchorClass').find('input:text').removeAttr('required');
-        $('.regularClass').show();
-        $('.regularClass').find('input:text').attr('required', true);
-
-        $('.dailyStartCls').show();
-        $('.dailyStartCls').find('input:text').attr('required', true);
-        $(".dailyanchorDiv").hide();
-        $(".dailyanchorDiv").find('input:text').removeAttr('required', true);
-
-        $('.weeklyStartCls').show();
-        $('.weeklyStartCls').find('input:text,select').attr('required', true);
-        $(".weeklyanchorDiv").hide();
-        $(".weeklyanchorDiv").find('input:text').removeAttr('required', true);
-
-        $('.monthlyStartCls').show();
-        $('.monthlyStartCls').find('input:text').attr('required', true);
-        $(".monthlyanchorDiv").hide();
-        $(".monthlyanchorDiv").find('input:text').removeAttr('required', true);
-
-        $('.manuallyContainer').show();
-        $('.manuallyContainer').find('input:text').attr('required', true);
-        $(".manuallyAnchorContainer").hide();
-        $(".manuallyAnchorContainer").find('input:text').removeAttr('required', true);
-        $('.anchortypeclass').hide();
-        $('.anchortypeclass').removeAttr('required');
-        $("#anchorDateId").val("");
-        $(".Selectedtooltip").show();
+      $("#weekDaysId").show();
+      $(".weeklyRegular").show();
+      $("#monthlyDateId").show();
+      $(".monthlyRegular").show();
+      $("#activeMonthlyRegular").show();
+      localStorage.setItem("IsActiveAnchorDateSelected", "false");
+      localStorage.setItem("IsActiveRegularSelected", "true");
     }
 
     $(".typeofschedule").change(function () {
@@ -1360,8 +1287,6 @@
 
         $("#monthlyDateId").hide();
         $("#monthlyDateId").find('input:text').removeAttr('required', true);
-        $(".monthlyRegular").hide();
-        $(".monthlyRegular").removeAttr('required');
 
         $("#activeMonthlyRegular").hide();
         $("#months").removeAttr('required');
@@ -1403,24 +1328,6 @@
         $(".manuallyContainer").hide();
         $(".manuallyContainer").find('input:text').removeAttr('required');
         $(".Selectedtooltip").hide();
-
-        var j = 0;
-        for (j = customCount; j > 0; j--) {
-          var xdays = $("#xdays" + j).val();
-          
-          if(xdays == '') {
-          	document.getElementById('manualTime0').value = '';
-        	  
-            $("#AnchorDate" + j ).hide();
-            $("#AnchorDate" + j ).find('input:text').removeAttr('required', true);
-
-            $("#AddButton").show();
-            $("#AddButton").attr('required', true);
-          } else {
-            $("#AddButton").hide();
-            $("#AddButton").attr('required', false);
-          }
-        }
       } else {
 
         localStorage.setItem("IsActiveAnchorDateSelected", "false");
@@ -1435,9 +1342,6 @@
         $("#monthlyDateId").show();
         $("#monthlyDateId").attr('required', true);
 
-        $(".monthlyRegular").show();
-        $(".monthlyRegular").attr('required', true);
-        
         $("#activeMonthlyRegular").show();
         $("#months").attr('required', true);
 
@@ -1469,25 +1373,6 @@
         $('.anchortypeclass').removeAttr('required');
         $("#anchorDateId").val("");
         $(".Selectedtooltip").show();
-
-       var i = 0;
-       for (i = customCount-1; i > 0; i--) {
-         var RegStartDate = $("#StartDate" + i).val();
-         
-         if(RegStartDate == '') {
-       	   document.getElementById('customTime0').value = '';
-       	   $("#customTime0").attr("disabled", true);
-         
-           $("#RegDate" + i ).hide();
-           $("#RegDate" + i ).find('input:text').removeAttr('required', true);
-
-           $("#AddButton").show();
-           $("#AddButton").attr('required', true);
-         } else {
-           $("#AddButton").hide();
-           $("#AddButton").attr('required', false);
-         }
-       }
       }
 
       if (schedule_opts == 'One time') {
@@ -2186,7 +2071,6 @@
   }
 
   function addTime() {
-	  $('.dailyTimeDiv').find(".delete ").css("visibility", "visible");
     count = count + 1;
     var newTime = "<div class='time-opts mt-md dailyTimeDiv' id=" + count + ">" +
         "  <span class='form-group m-none dis-inline vertical-align-middle pr-md'>" +
@@ -2221,8 +2105,6 @@
     $(".time-opts").parents("form").validator();
     if ($('.time-opts').length > 1) {
       $(".remBtnDis").removeClass("hide");
-    } else if ($('.dailyTimeDiv').length == 1) {
-	   	 $('.dailyTimeDiv').find(".delete").css("visibility", "hidden");
     } else {
       $(".remBtnDis").addClass("hide");
     }
@@ -2232,17 +2114,12 @@
   }
 
   function addDate() {
-	$('.manually-option').find(".delete").css("visibility", "visible");
-    customCount =  parseInt(customCount) + 1;
-    
-    $("#AddButton").hide();
-    $("#AddButton").attr('required', false);
-    
-    var newDateCon = "<div class='manually-option mb-md form-group' id='RegDate" + customCount + "'>"
+    customCount = customCount + 1;
+    var newDateCon = "<div class='manually-option mb-md form-group' id='" + customCount + "'>"
         + "  <span class='form-group dis-inline vertical-align-middle pr-md'>"
         + "  <input id='StartDate" + customCount + "' type='text' count='" + customCount
         + "' required name='activeTaskCustomScheduleBo[" + customCount
-        + "].frequencyStartDate' class='form-control calendar customCalnder cusStrDate' placeholder='Start date' onclick='customStartDate(this.id,"
+        + "].frequencyStartDate' class='form-control calendar customCalnder cusStrDate' placeholder='Start Date' onclick='customStartDate(this.id,"
         + customCount + ");'/>"
         + "	<span class='help-block with-errors red-txt'></span>"
         + "  </span>"
@@ -2252,7 +2129,7 @@
         + "  <span class='form-group dis-inline vertical-align-middle pr-md'>"
         + "  <input id='EndDate" + customCount + "' type='text' count='" + customCount
         + "' required name='activeTaskCustomScheduleBo[" + customCount
-        + "].frequencyEndDate' class='form-control calendar customCalnder cusEndDate' placeholder='End date' onclick='customEndDate(this.id,"
+        + "].frequencyEndDate' class='form-control calendar customCalnder cusEndDate' placeholder='End Date' onclick='customEndDate(this.id,"
         + customCount + ");'/>"
         + "<span class='help-block with-errors red-txt'></span>"
         + "  </span>"
@@ -2287,8 +2164,6 @@
     $(".manually-option").parents("form").validator();
     if ($('.manually-option').length > 1) {
       $('.manuallyContainer').find(".remBtnDis").removeClass("hide");
-    } else if ( $('.manually-option').length == 1 ) {
-   	 $('.manually-option').find(".delete").css("visibility", "hidden");
     } else {
       $('.manuallyContainer').find(".remBtnDis").addClass("hide");
     }
@@ -2393,7 +2268,7 @@
 
     var activeTask = new Object();
     var anchorDateId = $("#anchorDateId option:selected").val();
-    if (anchorDateId != null && typeof anchorDateId != 'undefined') {
+    if (anchorDateId != null && anchorDateId != '' && typeof anchorDateId != 'undefined') {
       activeTask.anchorDateId = anchorDateId;
     }
     if (id != null && id != '' && typeof id != 'undefined') {
@@ -2518,7 +2393,7 @@
         $('.manually-anchor-option').each(function () {
           var activeTaskCustomFrequencey = new Object();
           activeTaskCustomFrequencey.activeTaskId = id;
-          var id = $(this).attr("id").replace('AnchorDate','');
+          var id = $(this).attr("id");
           var xSign = $('#xSign' + id).val();
           var xSignVal = $('#xdays' + id).val();
           var ySign = $('#ySign' + id).val();
@@ -2559,7 +2434,7 @@
         $('.manually-option').each(function () {
           var activeTaskCustomFrequencey = new Object();
           activeTaskCustomFrequencey.activeTaskId = id;
-          var id = $(this).attr("id").replace('RegDate','');
+          var id = $(this).attr("id");
           var startdate = $("#StartDate" + id).val();
           var enddate = $("#EndDate" + id).val();
           var time = $("#customTime" + id).val();
@@ -2603,7 +2478,7 @@
       var count = 0;
       $('.time-opts').each(function () {
         var activeTaskFrequencey = new Object();
-        var id = $(this).attr("id").replace('AnchorDate','');
+        var id = $(this).attr("id");
         var frequence_time = $('#time' + id).val();
         if (frequence_time != null && frequence_time != '' && typeof frequence_time
             != 'undefined') {
@@ -3207,11 +3082,10 @@
   }
 
   function addDateAnchor() {
-	$('.manually-anchor-option').find(".delete").css("visibility", "visible");
     customAnchorCount = $('.manually-anchor-option').length;
-    var newDateCon = "<div class='manually-anchor-option mb-md form-group' id='AnchorDate" + customAnchorCount
+    var newDateCon = "<div class='manually-anchor-option mb-md form-group' id='" + customAnchorCount
         + "'>"
-        + "<span class='mb-sm pr-md'><span class='light-txt opacity06'> Anchor date </span></span>"
+        + "<span class='mb-sm pr-md'><span class='light-txt opacity06'> Anchor Date </span></span>"
         + "<span><select class='signDropDown selectpicker sign-box' count='" + customAnchorCount
         + "' title='Select' name='activeTaskCustomScheduleBo[" + customAnchorCount
         + "].xDaysSign' id='xSign" + customAnchorCount + "'>"
@@ -3224,7 +3098,7 @@
         + customAnchorCount + "].timePeriodFromDays'"
         + "maxlength='3' required pattern='[0-9]+' data-pattern-error='Please enter valid number.' data-type='xancorText'/><span class='help-block with-errors red-txt'></span>"
         + "</span>"
-        + "<span class='mb-sm pr-md'><span class='light-txt opacity06'> days <span style='padding-right:5px;padding-left:5px'>to </span>  Anchor date </span></span>"
+        + "<span class='mb-sm pr-md'><span class='light-txt opacity06'> days <span style='padding-right:5px;padding-left:5px'>to </span>  Anchor Date </span></span>"
         + "<span><select class='signDropDown selectpicker sign-box' count='" + customAnchorCount
         + "' title='Select' name='activeTaskCustomScheduleBo[" + customAnchorCount
         + "].yDaysSign' id='ySign" + customAnchorCount + "'>"
@@ -3270,8 +3144,6 @@
     $(".manually-anchor-option").parents("form").validator();
     if ($('.manually-anchor-option').length > 1) {
       $('.manuallyAnchorContainer').find(".remBtnDis").removeClass("hide");
-    } else if ( $('.manually-anchor-option').length == 1 ) {
-   	 $('.manually-anchor-option').find(".delete").css("visibility", "hidden");
     } else {
       $('.manuallyAnchorContainer').find(".remBtnDis").addClass("hide");
     }
@@ -3287,7 +3159,7 @@
       }
       if (frequency_text == 'Manually Schedule') {
         $('.manually-anchor-option').each(function () {
-          var id = $(this).attr("id").replace('AnchorDate','');
+          var id = $(this).attr("id");
           $("#xSign" + id).children('option').remove();
           $("#ySign" + id).children('option').remove();
           $("#xSign" + id).append("<option value='0' selected>+</option>");
@@ -3318,7 +3190,7 @@
       }
       if (frequency_text == 'Manually Schedule') {
         $('.manually-anchor-option').each(function () {
-          var id = $(this).attr("id").replace('AnchorDate','');
+          var id = $(this).attr("id");
           $("#xSign" + id).children('option').remove();
           $("#ySign" + id).children('option').remove();
           $("#xSign" + id).append(
@@ -3353,8 +3225,7 @@
     jQuery(document).on("keyup", ".xdays", function () {
 
       var xday = $(this).val()
-      var parentId = $(this).parent().parent().attr("id").replace('AnchorDate','');
-      var parent_id = parseInt(parentId);
+      var parent_id = $(this).parent().parent().attr("id");
       var xsign = $("#xSign" + parent_id).val() === "0" ? "+" : "-";
       var xdayValue = parseInt(xsign + "" + xday);
       var yday = $("#ydays" + parent_id).val();
@@ -3382,12 +3253,7 @@
 
       } else {
 
-        var pre_parent_id = $("#AnchorDate" + parent_id).prev().attr("id");
-        if (pre_parent_id && pre_parent_id.indexOf("AnchorDate") >= 0) {
-          pre_parent_id = pre_parent_id.replace('AnchorDate','');
-        }
-
-        var pre_parent = parseInt(pre_parent_id);
+        var pre_parent = $("#" + parent_id).prev().attr("id");
         var pyday = $("#ydays" + pre_parent).val();
         var pysign = $("#ySign" + parent_id).val() === "0" ? "+" : "-";
         var pydayValue = parseInt(pysign + "" + pyday);
@@ -3434,7 +3300,7 @@
 
     jQuery(document).on("keyup", ".ydays", function () {
 
-      var parent_id = $(this).parent().parent().attr("id").replace('AnchorDate','');
+      var parent_id = $(this).parent().parent().attr("id");
       var xsign = $("#xSign" + parent_id).val() === "0" ? "+" : "-";
       var xday = $("#xdays" + parent_id).val();
       var xdayValue = parseInt(xsign + "" + xday);
@@ -3497,7 +3363,7 @@
       }
 
       if ($('.manually-anchor-option').length > 1) {
-        var pre_parent = $("#" + parent_id).prev().attr("id").replace('AnchorDate','');
+        var pre_parent = $("#" + parent_id).prev().attr("id");
         var pyday = $("#ydays" + pre_parent).val();
         var pysign = $("#ySign" + parent_id).val() === "0" ? "+" : "-";
         var pydayValue = parseInt(pysign + "" + pyday);

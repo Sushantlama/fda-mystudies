@@ -191,7 +191,7 @@ public class TestDataHelper {
 
   public AppEntity newAppEntity() {
     AppEntity appEntity = new AppEntity();
-    appEntity.setAppId(RandomStringUtils.randomAlphanumeric(8));
+    appEntity.setAppId("MyStudies-Id-1");
     appEntity.setAppName("MyStudies-1");
     return appEntity;
   }
@@ -205,7 +205,7 @@ public class TestDataHelper {
 
   public LocationEntity newLocationEntity() {
     LocationEntity locationEntity = new LocationEntity();
-    locationEntity.setCustomId(RandomStringUtils.randomAlphanumeric(8));
+    locationEntity.setCustomId(CUSTOM_ID_VALUE);
     locationEntity.setDescription(LOCATION_DESCRIPTION_VALUE);
     locationEntity.setName(RandomStringUtils.randomAlphanumeric(8));
     locationEntity.setStatus(ACTIVE_STATUS);
@@ -237,19 +237,6 @@ public class TestDataHelper {
     return siteEntity;
   }
 
-  public UserRegAdminEntity createUserRegAdminEntity() {
-    return userRegAdminRepository.saveAndFlush(newUserRegAdminEntity());
-  }
-
-  public AppEntity createAppEntity(UserRegAdminEntity userEntity) {
-    AppEntity appEntity = newAppEntity();
-    AppPermissionEntity appPermissionEntity = new AppPermissionEntity();
-    appPermissionEntity.setEdit(Permission.EDIT);
-    appPermissionEntity.setUrAdminUser(userEntity);
-    appEntity.addAppPermissionEntity(appPermissionEntity);
-    return appRepository.saveAndFlush(appEntity);
-  }
-
   public AppEntity createAppEntityForSiteControllerTest(UserRegAdminEntity userEntity) {
     AppEntity appEntity = appEntity();
     AppPermissionEntity appPermissionEntity = new AppPermissionEntity();
@@ -264,6 +251,19 @@ public class TestDataHelper {
     appEntity.setAppId("MyStudies-Id-2");
     appEntity.setAppName("MyStudies-2");
     return appEntity;
+  }
+
+  public UserRegAdminEntity createUserRegAdminEntity() {
+    return userRegAdminRepository.saveAndFlush(newUserRegAdminEntity());
+  }
+
+  public AppEntity createAppEntity(UserRegAdminEntity userEntity) {
+    AppEntity appEntity = newAppEntity();
+    AppPermissionEntity appPermissionEntity = new AppPermissionEntity();
+    appPermissionEntity.setEdit(Permission.EDIT);
+    appPermissionEntity.setUrAdminUser(userEntity);
+    appEntity.addAppPermissionEntity(appPermissionEntity);
+    return appRepository.saveAndFlush(appEntity);
   }
 
   public StudyEntity createStudyEntity(UserRegAdminEntity userEntity, AppEntity appEntity) {

@@ -149,7 +149,6 @@ public class StudyStateServiceImpl implements StudyStateService {
                     ParticipantStudyEntity::getStudyId,
                     Function.identity(),
                     (existing, replacement) -> existing));
-
     try {
       for (StudiesBean studyBean : studiesBeenList) {
         String participantId =
@@ -227,7 +226,6 @@ public class StudyStateServiceImpl implements StudyStateService {
           studyStateBean.setHashedToken(
               EnrollmentManagementUtil.getHashedValue(enrolledTokenVal.toUpperCase()));
         }
-
         if (participantStudy.getStudy() != null) {
           studyStateBean.setStudyId(participantStudy.getStudy().getCustomId());
         }
@@ -271,11 +269,11 @@ public class StudyStateServiceImpl implements StudyStateService {
   @Override
   @Transactional
   public WithDrawFromStudyRespBean withdrawFromStudy(
-      String participantId, String studyId, AuditLogEventRequest auditRequest) {
+      String participantId, String studyId, boolean delete, AuditLogEventRequest auditRequest) {
     logger.info("StudyStateServiceImpl withdrawFromStudy() - Starts ");
     WithDrawFromStudyRespBean respBean = null;
 
-    String message = studyStateDao.withdrawFromStudy(participantId, studyId);
+    String message = studyStateDao.withdrawFromStudy(participantId, studyId, delete);
     if (message.equalsIgnoreCase(MyStudiesUserRegUtil.ErrorCodes.SUCCESS.getValue())) {
       Optional<ParticipantStudyEntity> participantStudy =
           participantStudyRepository.findByParticipantId(participantId);
@@ -297,7 +295,11 @@ public class StudyStateServiceImpl implements StudyStateService {
       participantStudyRepository.saveAndFlush(participantStudy.get());
 
       enrollUtil.withDrawParticipantFromStudy(
-          participantId, participantStudy.get().getStudy().getVersion(), studyId, auditRequest);
+          participantId,
+          participantStudy.get().getStudy().getVersion(),
+          studyId,
+          delete,
+          auditRequest);
       respBean = new WithDrawFromStudyRespBean();
       respBean.setCode(HttpStatus.OK.value());
       respBean.setMessage(MyStudiesUserRegUtil.ErrorCodes.SUCCESS.getValue().toLowerCase());

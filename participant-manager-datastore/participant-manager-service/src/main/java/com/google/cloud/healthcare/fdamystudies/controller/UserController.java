@@ -17,8 +17,6 @@ import com.google.cloud.healthcare.fdamystudies.common.ErrorCode;
 import com.google.cloud.healthcare.fdamystudies.exceptions.ErrorCodeException;
 import com.google.cloud.healthcare.fdamystudies.mapper.AuditEventMapper;
 import com.google.cloud.healthcare.fdamystudies.service.ManageUserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.apache.commons.lang3.ArrayUtils;
@@ -36,10 +34,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(
-    tags = "Users",
-    value = "User related api's",
-    description = "Operations pertaining to Users in participant manager")
 @RestController
 public class UserController {
 
@@ -51,7 +45,6 @@ public class UserController {
 
   @Autowired private ManageUserService manageUserService;
 
-  @ApiOperation(value = "add new admin with permissions and invite through email")
   @PostMapping(
       value = "/users",
       consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -71,7 +64,6 @@ public class UserController {
     return ResponseEntity.status(userResponse.getHttpStatusCode()).body(userResponse);
   }
 
-  @ApiOperation(value = "update admin with permissions and send permission update email")
   @PutMapping(
       value = "/users/{adminUserId}/",
       consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -93,7 +85,6 @@ public class UserController {
     return ResponseEntity.status(userResponse.getHttpStatusCode()).body(userResponse);
   }
 
-  @ApiOperation(value = "fetch particular admin detail")
   @GetMapping(value = {"/users/admin/{adminId}"})
   public ResponseEntity<GetAdminDetailsResponse> getAdminDetailsAndApps(
       @RequestHeader("userId") String signedInUserId,
@@ -107,7 +98,6 @@ public class UserController {
     return ResponseEntity.status(userResponse.getHttpStatusCode()).body(userResponse);
   }
 
-  @ApiOperation(value = "fetch all admin details")
   @GetMapping(value = {"/users"})
   public ResponseEntity<GetUsersResponse> getUsers(
       @RequestHeader("userId") String superAdminUserId,
@@ -145,7 +135,6 @@ public class UserController {
     return ResponseEntity.status(userResponse.getHttpStatusCode()).body(userResponse);
   }
 
-  @ApiOperation(value = "resend invitation email to the user")
   @PostMapping(
       value = "/users/{userId}/invite",
       consumes = MediaType.APPLICATION_JSON_VALUE,

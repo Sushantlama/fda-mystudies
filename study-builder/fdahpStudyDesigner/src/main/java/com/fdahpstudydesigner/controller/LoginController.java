@@ -72,10 +72,8 @@ public class LoginController {
   public ModelAndView addPassword(HttpServletRequest request, UserBO userBO) {
     logger.info("LoginController - addPassword() - Starts");
     ModelAndView mv = new ModelAndView("redirect:sessionOut.do");
-    Map<String, String> propMap = FdahpStudyDesignerUtil.getAppProperties();
-    String sucMsg = "";
     try {
-
+      Map<String, String> propMap = FdahpStudyDesignerUtil.getAppProperties();
       HttpSession session = request.getSession(false);
       SessionObject sesObj =
           (SessionObject) session.getAttribute(FdahpStudyDesignerConstants.SESSION_OBJECT);
@@ -111,13 +109,9 @@ public class LoginController {
               .setAttribute("sucMsg", propMap.get("user.newpassword.success.msg"));
         }
       }
-      if (isIntialPasswordSetUp) {
-        sucMsg = propMap.get("user.account.setup.msg");
-      }
     } catch (Exception e) {
       logger.error("LoginController - addPassword() - ERROR ", e);
     }
-    mv = new ModelAndView("redirect:sessionOut.do?sucMsg=" + sucMsg);
     logger.info("LoginController - addPassword() - Ends");
     return mv;
   }

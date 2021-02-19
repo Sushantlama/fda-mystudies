@@ -31,7 +31,11 @@ describe('ParticipantDetailsComponent', () => {
   beforeEach(async(async () => {
     const participantDetailsSpy = jasmine.createSpyObj<ParticipantDetailsService>(
       'ParticipantDetailsService',
-      ['get', 'toggleInvitation', 'sendInvitation'],
+      {
+        get: of(expectedParticipantDetails),
+        toggleInvitation: of(expectedToggleResponse),
+        sendInvitation: of(expectedSendInviteResponse),
+      },
     );
 
     await TestBed.configureTestingModule({
@@ -58,15 +62,6 @@ describe('ParticipantDetailsComponent', () => {
       .then(() => {
         fixture = TestBed.createComponent(ParticipantDetailsComponent);
         component = fixture.componentInstance;
-        participantDetailsSpy.get.and.returnValue(
-          of(expectedParticipantDetails),
-        );
-        participantDetailsSpy.toggleInvitation.and.returnValue(
-          of(expectedToggleResponse),
-        );
-        participantDetailsSpy.sendInvitation.and.returnValue(
-          of(expectedSendInviteResponse),
-        );
         fixture.detectChanges();
         sendInviteButton = fixture.debugElement.query(
           By.css('[name="sendInvite"]'),
