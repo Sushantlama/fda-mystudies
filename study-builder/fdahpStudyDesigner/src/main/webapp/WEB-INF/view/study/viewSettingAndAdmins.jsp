@@ -310,15 +310,19 @@
           "${_csrf.parameterName}": "${_csrf.token}",
         },
         success: function platformValid(data, status) {
-        	 var message = data.message;
-             var errorMessage = data.errorMessage;
+      	  var message = data.message;
+          var errorMessage = data.errorMessage;
             
           $("body").removeClass("loading");
           if (message == "SUCCESS") {
             $('#completedId').removeAttr('disabled');
             bootbox.alert(errorMessage);
           } else {
-            submitButton(buttonText);
+            if ($('.checkbox input:checked').length == 0) {
+              $("input").attr("required", true);
+            } else {
+              submitButton(buttonText);
+            }
           }
         },
         error: function status(data, status) {
@@ -330,7 +334,11 @@
         global: false
       });
     } else {
+      if ($('.checkbox input:checked').length == 0) {
+        $("input").attr("required", true);
+      } else {
         submitButton(buttonText);
+      }
     }
   }
   function submitButton(buttonText) {
