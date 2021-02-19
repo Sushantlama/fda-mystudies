@@ -1,11 +1,3 @@
- /*
- * Copyright 2020-2021 Google LLC
- *
- * Use of this source code is governed by an MIT-style
- * license that can be found in the LICENSE file or at
- * https://opensource.org/licenses/MIT.
- */
-
 /*
 
 Name: 			common.js
@@ -154,7 +146,7 @@ $(document)
                             .append($("<ul><li> </li></ul>")
                             .attr("class","list-unstyled")
                             .attr("style","white-space:nowrap")
-                            .text("Please use allowed characters only: lowercase letters (a-z), digits (0-9), _ (underscore) and -(minus)."));
+                            .text("Please use allowed characters only: lowercase alphabets (a-z), digits (0-9), _ (underscore) and -(minus)."));
                       }
                     }
                   });       
