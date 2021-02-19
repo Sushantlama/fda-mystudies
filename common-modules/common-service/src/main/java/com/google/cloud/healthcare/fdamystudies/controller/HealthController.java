@@ -41,6 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
           response = BaseResponse.class)
     })
 @RestController
+@Api(tags = "Get Health", description = "Provides an indication about the health of the service")
 public class HealthController {
 
   private static Map<String, String> alwaysUp = Collections.singletonMap("status", "UP");
