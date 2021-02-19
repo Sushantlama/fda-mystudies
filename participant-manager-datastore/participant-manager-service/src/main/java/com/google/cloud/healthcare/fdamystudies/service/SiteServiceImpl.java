@@ -230,7 +230,8 @@ public class SiteServiceImpl implements SiteService {
         String.format(
             "Site %s added to locationId=%s and studyId=%s",
             siteResponse.getSiteId(), siteRequest.getLocationId(), siteRequest.getStudyId()));
-    return new SiteResponse(siteResponse.getSiteId(), MessageCode.ADD_SITE_SUCCESS);
+    return new SiteResponse(
+        siteResponse.getSiteId(), siteResponse.getSiteName(), MessageCode.ADD_SITE_SUCCESS);
   }
 
   private SiteResponse saveSiteWithSitePermissions(
@@ -1275,7 +1276,6 @@ public class SiteServiceImpl implements SiteService {
       site.setInvited(invitedCount);
       site.setEnrolled(enrolledCount);
     }
-
     if (site.getInvited() != null && site.getEnrolled() != null) {
       if (site.getInvited() != 0 && site.getInvited() >= site.getEnrolled()) {
         Double percentage =

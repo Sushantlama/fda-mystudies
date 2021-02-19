@@ -95,6 +95,13 @@
                        test="${notificationBO.notificationScheduleType eq 'notImmediate'}">checked</c:if>
                    <c:if test="${notificationBO.actionPage eq 'addOrCopy'}">checked</c:if>>
             <label for="inlineRadio1">Schedule this notification</label>
+            <span
+      <fmt:formatDate value = "${date}" pattern="z" var="server_timezone"/>
+          class="ml-xs sprites_v3 filled-tooltip Selectedtooltip"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="The notification gets delivered to mobile app users at the selected date and time as per server time zone which is ${server_timezone}.">
+      </span>
           </span>
           <span class="radio radio-inline">
             <input type="radio" id="inlineRadio2" value="immediate" name="currentDateTime"
@@ -102,7 +109,7 @@
                        test="${notificationBO.notificationScheduleType eq 'immediate'}">checked</c:if>
                    <c:if test="${studyBo.status ne 'Active'}">disabled</c:if>>
             <label for="inlineRadio2" data-toggle="tooltip" data-placement="top"
-                   title="This option will be available once the study is launched.">Send Immediately</label>
+                   title="This option will be available once the study is launched.">Send immediately</label>
           </span>
           <div class="help-block with-errors red-txt"></div>
           <c:if test="${not empty notificationHistoryNoDateTime}">
@@ -117,7 +124,7 @@
       </div>
 
       <div class="add_notify_option mandatoryForStudyNotification">
-        <div class="gray-xs-f mb-xs">Select Date
+        <div class="gray-xs-f mb-xs">Select date
           <span class="requiredStar">*</span>
         </div>
         <div class="form-group date">
@@ -174,13 +181,6 @@
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    <c:if test="${studyBo.status eq 'Active'}">
-    $('[data-toggle="tooltip"]').tooltip('destroy');
-    </c:if>
-
-    <c:if test="${notificationBO.actionPage eq 'view'}">
-    $('[data-toggle="tooltip"]').tooltip('destroy');
-    </c:if>
 
     <c:if test="${notificationBO.actionPage eq 'view'}">
     $('#studyNotificationFormId input,textarea').prop('disabled', true);

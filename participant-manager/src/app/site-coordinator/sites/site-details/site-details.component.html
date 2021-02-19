@@ -134,7 +134,7 @@
                       <a
                         download="Email_Import_Template"
                         target="_blank"
-                        href="/assets/Email_Import_Template.xlsx"
+                        href="assets/Email_Import_Template.xlsx"
                         class="p-none"
                       >
                         <div class="download__text">Download template</div>
@@ -224,7 +224,7 @@
                   <a
                     download="Email_Import_Template"
                     target="_blank"
-                    href="/assets/Email_Import_Template.xlsx"
+                    href="assets/Email_Import_Template.xlsx"
                     class="p-none"
                   >
                     <div class="download__text">Download template</div>
@@ -643,8 +643,16 @@
                             enrollmentStatus.NotEligile
                         "
                       >
+                        <label
+                          [ngClass]="
+                            siteParticipants.participantRegistryDetail
+                              .sitePermission === permission.ViewAndEdit
+                              ? 'chk_box_hidden'
+                              : 'chk_box_hidden2'
+                          "
+                          for="{{ participant.id }}"
+                        ></label>
                         <span
-                          [ngClass]="{'ml-4 pl-3': invitedYetToEnrollCount > 0}"
                           class="no_st_en cursor__pointer outline__none"
                           [routerLink]="[
                             '/coordinator/participant',

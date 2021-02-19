@@ -52,6 +52,10 @@ import org.springframework.web.bind.annotation.RestController;
     value = "user management in auth server",
     description = "Operations pertaining to users in auth server")
 @RestController
+@Api(
+    tags = "Users",
+    value = "user management in auth server",
+    description = "Operations pertaining to users in auth server")
 public class UserController {
 
   private static final String STATUS_LOG = "status=%d";

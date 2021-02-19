@@ -13,8 +13,6 @@ import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.verify;
 import static com.google.cloud.healthcare.fdamystudies.common.JsonUtils.asJsonString;
-import static com.google.cloud.healthcare.fdamystudies.common.UserMgmntEvent.DATA_RETENTION_SETTING_CAPTURED_ON_WITHDRAWAL;
-import static com.google.cloud.healthcare.fdamystudies.common.UserMgmntEvent.PARTICIPANT_DATA_DELETED;
 import static com.google.cloud.healthcare.fdamystudies.common.UserMgmntEvent.READ_OPERATION_FAILED_FOR_USER_PROFILE;
 import static com.google.cloud.healthcare.fdamystudies.common.UserMgmntEvent.READ_OPERATION_SUCCEEDED_FOR_USER_PROFILE;
 import static com.google.cloud.healthcare.fdamystudies.common.UserMgmntEvent.USER_DELETED;
@@ -50,8 +48,10 @@ import com.google.cloud.healthcare.fdamystudies.common.OnboardingStatus;
 import com.google.cloud.healthcare.fdamystudies.common.PlaceholderReplacer;
 import com.google.cloud.healthcare.fdamystudies.config.ApplicationPropertyConfiguration;
 import com.google.cloud.healthcare.fdamystudies.model.ParticipantStudyEntity;
+import com.google.cloud.healthcare.fdamystudies.model.StudyEntity;
 import com.google.cloud.healthcare.fdamystudies.model.UserDetailsEntity;
 import com.google.cloud.healthcare.fdamystudies.repository.ParticipantStudyRepository;
+import com.google.cloud.healthcare.fdamystudies.repository.StudyRepository;
 import com.google.cloud.healthcare.fdamystudies.repository.UserDetailsRepository;
 import com.google.cloud.healthcare.fdamystudies.service.FdaEaUserDetailsServiceImpl;
 import com.google.cloud.healthcare.fdamystudies.service.UserManagementProfileService;
@@ -70,12 +70,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.web.servlet.MvcResult;
 
 public class UserProfileControllerTest extends BaseMockIT {
 
   private static final String USER_PROFILE_PATH = "/participant-user-datastore/userProfile";
+
+  private static final String STUDY_VERSION = "3.6";
 
   private static final String UPDATE_USER_PROFILE_PATH =
       "/participant-user-datastore/updateUserProfile";
@@ -93,8 +94,6 @@ public class UserProfileControllerTest extends BaseMockIT {
 
   @Autowired private ObjectMapper objectMapper;
 
-  @Autowired private JavaMailSender emailSender;
-
   @Value("${response.server.url.participant.withdraw}")
   private String withdrawUrl;
 
@@ -103,6 +102,8 @@ public class UserProfileControllerTest extends BaseMockIT {
   @Autowired private UserDetailsRepository userDetailsRepository;
 
   @Autowired private ParticipantStudyRepository participantStudyRepository;
+
+  @Autowired private StudyRepository studyRepository;
 
   @Test
   public void contextLoads() {
@@ -266,7 +267,14 @@ public class UserProfileControllerTest extends BaseMockIT {
     HttpHeaders headers = TestUtils.getCommonHeaders(Constants.USER_ID_HEADER);
     headers.set(Constants.USER_ID_HEADER, Constants.USER_ID);
 
-    StudyReqBean studyReqBean = new StudyReqBean(Constants.STUDY_ID, Constants.TRUE);
+    Optional<StudyEntity> optStudyEntity = studyRepository.findByCustomStudyId(Constants.STUDY_ID);
+    if (optStudyEntity.isPresent()) {
+      StudyEntity studyEntity = optStudyEntity.get();
+      studyEntity.setVersion(Float.valueOf(STUDY_VERSION));
+      studyRepository.saveAndFlush(studyEntity);
+    }
+
+    StudyReqBean studyReqBean = new StudyReqBean(Constants.STUDY_ID);
     List<StudyReqBean> list = new ArrayList<StudyReqBean>();
     list.add(studyReqBean);
     DeactivateAcctBean acctBean = new DeactivateAcctBean(list);
@@ -305,25 +313,20 @@ public class UserProfileControllerTest extends BaseMockIT {
         1,
         postRequestedFor(
             urlEqualTo(
-                "/response-datastore/participant/withdraw?studyId=studyId1&participantId=4&deleteResponses=true")));
+                "/response-datastore/participant/withdraw?studyId=studyId1&studyVersion=3.6"
+                    + "&participantId=4")));
 
     AuditLogEventRequest auditRequest = new AuditLogEventRequest();
     auditRequest.setUserId(Constants.USER_ID);
     auditRequest.setStudyId(Constants.STUDY_ID);
+    auditRequest.setStudyVersion(STUDY_VERSION);
     auditRequest.setParticipantId("4");
 
     Map<String, AuditLogEventRequest> auditEventMap = new HashedMap<>();
     auditEventMap.put(USER_DELETED.getEventCode(), auditRequest);
-    auditEventMap.put(PARTICIPANT_DATA_DELETED.getEventCode(), auditRequest);
-    auditEventMap.put(DATA_RETENTION_SETTING_CAPTURED_ON_WITHDRAWAL.getEventCode(), auditRequest);
     auditEventMap.put(WITHDRAWAL_INTIMATED_TO_RESPONSE_DATASTORE.getEventCode(), auditRequest);
 
-    verifyAuditEventCall(
-        auditEventMap,
-        USER_DELETED,
-        PARTICIPANT_DATA_DELETED,
-        DATA_RETENTION_SETTING_CAPTURED_ON_WITHDRAWAL,
-        WITHDRAWAL_INTIMATED_TO_RESPONSE_DATASTORE);
+    verifyAuditEventCall(auditEventMap, USER_DELETED, WITHDRAWAL_INTIMATED_TO_RESPONSE_DATASTORE);
   }
 
   @Test

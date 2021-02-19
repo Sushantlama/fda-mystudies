@@ -37,6 +37,8 @@ export class SiteDetailsComponent
   enableDisable = '';
   toggleDisplay = false;
   userIds: string[] = [];
+  userIdsBackup: string[] = [];
+  activeTabForDisabled='';
   onBoardingStatus = OnboardingStatus;
   activeTab = OnboardingStatus.All;
   newlyImportedParticipants: Participant[] = [];
@@ -90,6 +92,18 @@ export class SiteDetailsComponent
 
         this.siteDetailsBackup.participantRegistryDetail.registryParticipants.map(
           (participant) => {
+
+            if(this.activeTabForDisabled === OnboardingStatus.Disabled){
+              const resultFromDisabled= this.userIds.filter(
+                (idsFromDisabled)=> 
+                idsFromDisabled === participant.id,
+              );
+              if(resultFromDisabled.length > 0){
+                participant.newlyCreatedUser = true;
+                
+              }
+
+            }else{
             const result = this.newlyImportedParticipants.filter(
               (newlyVreatedEmails) =>
                 newlyVreatedEmails.email === participant.email,
@@ -97,6 +111,8 @@ export class SiteDetailsComponent
             if (result.length > 0) {
               participant.newlyCreatedUser = true;
             }
+
+          }
             return participant;
           },
         );
@@ -114,6 +130,8 @@ export class SiteDetailsComponent
           (participant: RegistryParticipant) =>
             participant.email?.toLowerCase().includes(query.toLowerCase()),
         );
+      
+
         return this.siteDetailsBackup;
       }),
     );
@@ -129,9 +147,16 @@ export class SiteDetailsComponent
       tab === OnboardingStatus.New || tab === OnboardingStatus.Invited
         ? 'Disable invitation'
         : 'Enable invitation';
+
+    this.activeTabForDisabled=this.activeTab;
     this.activeTab = tab;
     this.toggleDisplay = false;
+    this.userIdsBackup=this.userIds;
     this.userIds = [];
+
+    if(this.activeTabForDisabled === OnboardingStatus.Disabled){
+      this.userIds=this.userIdsBackup;
+    }  
     this.fetchSiteParticipant(tab);
   }
 

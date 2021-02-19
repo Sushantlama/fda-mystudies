@@ -3,6 +3,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<style>
+	.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+	    text-transform: inherit; !important
+		}
+		
+    .help-block ul {
+    width: max-content !important;
+    }
+</style>
 <div class="changeContent">
   <form:form
       action="/studybuilder/adminStudies/saveOrUpdateActiveTaskContent.do?_S=${param._S}"
@@ -20,14 +29,14 @@
          name="currentPage">
   <div class="pt-lg">
     <div class="gray-xs-f mb-sm">
-      Activity Short Title or Key
+      Activity short title or key
       <small>(50 characters max)</small>
       <span
           class="requiredStar"> *
       </span>
       <span
           class="ml-xs sprites_v3 filled-tooltip" data-toggle="tooltip"
-          title="This must be a human-readable activity identifier and unique across all activities of the study.Note that this field cannot be edited once the study is Launched."></span>
+          title="A human-readable identifier that must be unique across all activities of the study. Allowed characters are lowercase alphabets (a-z), digits (0-9), _ (underscore) and -(minus)."></span>
     </div>
     <div class="add_notify_option">
       <div class="form-group shortTitleClass">
@@ -213,7 +222,7 @@
             id="${taskMasterAttributeBo.attributeName}_stat_id"
             name="taskAttributeValueBos[1].useForStatistic" value="option1">
           <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use
-            for Statistic</label>
+            for statistic</label>
         </span>
       </div>
       <div
@@ -241,8 +250,8 @@
 
         <div>
           <div class="gray-xs-f mb-sm">
-            Display name for the Stat (e.g. Total Hours of Activity Over 6
-            Months)
+            Display name for the stat (e.g. Total hours of activity over 6
+            months)
             <small>(50 characters max)</small>
             <span
                 class="requiredStar"> *
@@ -257,7 +266,7 @@
 
         <div>
           <div class="gray-xs-f mb-sm">
-            Display Units (e.g. hours)
+            Display units (e.g. hours)
             <small>(15 characters max)</small>
             <span
                 class="requiredStar"> *
@@ -275,7 +284,7 @@
 
         <div>
           <div class="gray-xs-f mb-sm">
-            Stat Type for image display
+            Stat type for image display
             <span class="requiredStar"> *</span>
           </div>
           <div class="add_notify_option form-group">
@@ -318,19 +327,19 @@
               <span class="mr-sm"><img
                   src="../images/icons/tick.png"
                   alt=""/></span>
-              <span>Current Day</span>
+              <span>Current day</span>
             </span>
             <span
                 class="mr-lg">
               <span class="mr-sm"><img
                   src="../images/icons/tick.png" alt=""/></span>
-              <span>Current Week</span>
+              <span>Current week</span>
             </span>
             <span
                 class="mr-lg">
               <span class="mr-sm"><img
                   src="../images/icons/tick.png" alt=""/></span>
-              <span>Current Month</span>
+              <span>Current month</span>
             </span>
             <span class="txt-gray">(Rollback option provided for
               these three options)
@@ -494,7 +503,7 @@
                 <c:if test="${taskValueAttributeBo.useForStatistic==true}">checked</c:if>
                 value="${taskValueAttributeBo.useForStatistic}"> <label
                 for="${taskMasterAttributeBo.attributeName}_stat_id">Use
-              for Statistic</label>
+              for statistic</label>
             </span>
           </div>
           <div
@@ -527,8 +536,8 @@
 
             <div>
               <div class="gray-xs-f mb-sm">
-                Display name for the Stat (e.g. Total Hours of Activity Over 6
-                Months)
+                Display name for the stat (e.g. Total hours of activity over 6
+                months)
                 <small> (50 characters max)</small>
                 <span
                     class="requiredStar"> *
@@ -546,7 +555,7 @@
 
             <div>
               <div class="gray-xs-f mb-sm">
-                Display Units (e.g. hours)
+                Display units (e.g. hours)
                 <small>(15 characters max)</small>
                 <span
                     class="requiredStar"> *
@@ -568,7 +577,7 @@
 
               <div>
                 <div class="gray-xs-f mb-sm">
-                  Stat Type for image display
+                  Stat type for image display
                   <span class="requiredStar">
                     *
                   </span>
@@ -615,19 +624,19 @@
                     <span class="mr-sm"><img
                         src="../images/icons/tick.png"
                         alt=""/></span>
-                    <span>Current Day</span>
+                    <span>Current day</span>
                   </span>
                   <span
                       class="mr-lg">
                     <span class="mr-sm"><img
                         src="../images/icons/tick.png" alt=""/></span>
-                    <span>Current Week</span>
+                    <span>Current week</span>
                   </span>
                   <span class="mr-lg">
                     <span class="mr-sm"><img
                         src="../images/icons/tick.png"
                         alt=""/></span>
-                    <span>Current Month</span>
+                    <span>Current month</span>
                   </span>
                   <span class="txt-gray">(Rollback option provided for
                     these three options)
@@ -922,14 +931,13 @@
           if (charCode == 16)
             isShift = false;
           if (!isShift && $(this).val()) {
-            var regularExpression = /^[A-Za-z0-9*()_+|:.-]*$/;
+            var regularExpression = /^[a-z0-9_-]*$/;
             if (!regularExpression.test($(this).val())) {
-              var newVal = $(this).val().replace(/[^A-Za-z0-9\*\(\)_+|:.\-]/g, '');
+              var newVal = $(this).val().replace(/[^a-z0-9_-]/g, '');
               e.preventDefault();
               $(this).val(newVal);
-              $(this).parent().addClass("has-danger has-error");
               $(this).parent().find(".help-block").empty().append($("<ul><li> </li></ul>").attr("class","list-unstyled").text(
-                  "The characters like (< >) are not allowed."));
+                  "Please use allowed characters only: lowercase alphabets (a-z), digits (0-9), _ (underscore) and -(minus)."));
             }
           }
         });

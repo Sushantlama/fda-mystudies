@@ -9,6 +9,10 @@
     line-height: 12px;
     margin: 0px;
 }
+
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    text-transform: inherit; !important
+	}
 </style>
 
 <div class="changeContent">
@@ -21,7 +25,7 @@
   <input type="hidden" value="${actionPage}" id="actionPage" name="actionPage">
   <input type="hidden" value="${currentPage}" id="currentPageId" name="currentPage">
   <div class="pt-lg">
-    <div class="gray-xs-f mb-sm">Activity Short Title or Key
+    <div class="gray-xs-f mb-sm">Activity short title or key
       <small>(50 characters max)</small>
       <span
           class="requiredStar"> *
@@ -206,7 +210,7 @@
                  id="${taskMasterAttributeBo.attributeName}_stat_id"
                  name="taskAttributeValueBos[2].useForStatistic"
                  value="option1">
-          <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use for Statistic</label>
+          <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use for statistic</label>
         </span>
       </div>
       <div class="addLineStaticBlock_${taskMasterAttributeBo.attributeName}" style="display:none">
@@ -228,8 +232,8 @@
         </div>
 
         <div>
-          <div class="gray-xs-f mb-sm">Display name for the Stat (e.g. Total Hours of Activity Over
-            6 Months)
+          <div class="gray-xs-f mb-sm">Display name for the stat (e.g. Total hours of activity over
+            6 months)
             <small>(50 characters max)</small>
             <span class="requiredStar"> *</span>
           </div>
@@ -241,7 +245,7 @@
         </div>
 
         <div>
-          <div class="gray-xs-f mb-sm">Display Units (e.g. hours)
+          <div class="gray-xs-f mb-sm">Display units (e.g. hours)
             <small>(15 characters max)</small>
             <span
                 class="requiredStar"> *
@@ -257,7 +261,7 @@
         </div>
 
         <div>
-          <div class="gray-xs-f mb-sm">Stat Type for image display
+          <div class="gray-xs-f mb-sm">Stat type for image display
             <span
                 class="requiredStar"> *
             </span>
@@ -296,17 +300,17 @@
             <span class="mr-lg">
               <span class="mr-sm"><img src="../images/icons/tick.png"
                                        alt=""/></span>
-              <span>Current Day</span>
+              <span>Current day</span>
             </span>
             <span class="mr-lg">
               <span class="mr-sm"><img src="../images/icons/tick.png"
                                        alt=""/></span>
-              <span>Current Week</span>
+              <span>Current week</span>
             </span>
             <span class="mr-lg">
               <span class="mr-sm"><img src="../images/icons/tick.png"
                                        alt=""/></span>
-              <span>Current Month</span>
+              <span>Current month</span>
             </span>
             <span class="txt-gray">(Rollback option provided for these three options)</span>
           </div>
@@ -471,7 +475,7 @@
                    <c:if
                        test="${taskValueAttributeBo.useForStatistic==true}">checked</c:if>
                    value="${taskValueAttributeBo.useForStatistic}">
-            <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use for Statistic</label>
+            <label for="${taskMasterAttributeBo.attributeName}_stat_id">Use for statistic</label>
           </span>
         </div>
         <div class="addLineStaticBlock_${taskMasterAttributeBo.attributeName}"
@@ -500,9 +504,9 @@
           </div>
 
           <div>
-            <div class="gray-xs-f mb-sm">Display name for the Stat (e.g. Total Hours of Activity
-              Over 6
-              Months)
+            <div class="gray-xs-f mb-sm">Display name for the stat (e.g. Total hours of activity
+              over 6
+              months)
               <small> (50 characters max)</small>
               <span class="requiredStar"> *</span>
             </div>
@@ -516,7 +520,7 @@
 
 
           <div>
-            <div class="gray-xs-f mb-sm">Display Units (e.g. hours)
+            <div class="gray-xs-f mb-sm">Display units (e.g. hours)
               <small>(15 characters
                 max)
               </small>
@@ -538,7 +542,7 @@
 
 
             <div>
-              <div class="gray-xs-f mb-sm">Stat Type for image display
+              <div class="gray-xs-f mb-sm">Stat type for image display
                 <span
                     class="requiredStar"> *
                 </span>
@@ -579,17 +583,17 @@
                   <span class="mr-sm"><img
                       src="../images/icons/tick.png"
                       alt=""/></span>
-                  <span>Current Day</span>
+                  <span>Current day</span>
                 </span>
                 <span class="mr-lg">
                   <span class="mr-sm"><img src="../images/icons/tick.png"
                                            alt=""/></span>
-                  <span>Current Week</span>
+                  <span>Current week</span>
                 </span>
                 <span class="mr-lg">
                   <span class="mr-sm"><img src="../images/icons/tick.png"
                                            alt=""/></span>
-                  <span>Current Month</span>
+                  <span>Current month</span>
                 </span>
                 <span class="txt-gray">(Rollback option provided for these three options)</span>
               </div>

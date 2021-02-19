@@ -8,8 +8,6 @@
 
 package com.google.cloud.healthcare.fdamystudies.service;
 
-import static com.google.cloud.healthcare.fdamystudies.common.UserMgmntEvent.DATA_RETENTION_SETTING_CAPTURED_ON_WITHDRAWAL;
-import static com.google.cloud.healthcare.fdamystudies.common.UserMgmntEvent.PARTICIPANT_DATA_DELETED;
 import static com.google.cloud.healthcare.fdamystudies.common.UserMgmntEvent.USER_DELETED;
 import static com.google.cloud.healthcare.fdamystudies.common.UserMgmntEvent.USER_DELETION_FAILED;
 
@@ -23,7 +21,6 @@ import com.google.cloud.healthcare.fdamystudies.beans.ErrorBean;
 import com.google.cloud.healthcare.fdamystudies.beans.UserProfileRespBean;
 import com.google.cloud.healthcare.fdamystudies.beans.UserRequestBean;
 import com.google.cloud.healthcare.fdamystudies.beans.WithdrawFromStudyBean;
-import com.google.cloud.healthcare.fdamystudies.common.CommonConstants;
 import com.google.cloud.healthcare.fdamystudies.common.ErrorCode;
 import com.google.cloud.healthcare.fdamystudies.common.PlatformComponent;
 import com.google.cloud.healthcare.fdamystudies.common.UserMgmntAuditHelper;
@@ -35,21 +32,23 @@ import com.google.cloud.healthcare.fdamystudies.exceptions.ErrorCodeException;
 import com.google.cloud.healthcare.fdamystudies.model.AppEntity;
 import com.google.cloud.healthcare.fdamystudies.model.AuthInfoEntity;
 import com.google.cloud.healthcare.fdamystudies.model.LoginAttemptsEntity;
+import com.google.cloud.healthcare.fdamystudies.model.StudyEntity;
 import com.google.cloud.healthcare.fdamystudies.model.UserDetailsEntity;
 import com.google.cloud.healthcare.fdamystudies.repository.AppRepository;
+import com.google.cloud.healthcare.fdamystudies.repository.StudyRepository;
 import com.google.cloud.healthcare.fdamystudies.repository.UserDetailsRepository;
 import com.google.cloud.healthcare.fdamystudies.util.MyStudiesUserRegUtil;
 import com.google.cloud.healthcare.fdamystudies.util.UserManagementUtil;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +71,8 @@ public class UserManagementProfileServiceImpl implements UserManagementProfileSe
   @Autowired private EmailService emailService;
 
   @Autowired private AppRepository appRepository;
+
+  @Autowired private StudyRepository studyRepository;
 
   @Autowired UserDetailsRepository userDetailsRepository;
 
@@ -256,16 +257,19 @@ public class UserManagementProfileServiceImpl implements UserManagementProfileSe
 
     userDetailsId = commonDao.getUserInfoDetails(userId);
 
+    logger.info(
+        "deactivateAcctBean Request=" + ReflectionToStringBuilder.toString(deactivateAcctBean));
+    logger.info("deactivateAcctBean Request=" + deactivateAcctBean.toString());
+
     if (deactivateAcctBean != null
-        && deactivateAcctBean.getDeleteData() != null
-        && !deactivateAcctBean.getDeleteData().isEmpty()) {
-      for (StudyReqBean studyReqBean : deactivateAcctBean.getDeleteData()) {
+        && deactivateAcctBean.getStudyData() != null
+        && !deactivateAcctBean.getStudyData().isEmpty()) {
+      for (StudyReqBean studyReqBean : deactivateAcctBean.getStudyData()) {
         studyBean = new WithdrawFromStudyBean();
         participantId = commonDao.getParticipantId(userDetailsId, studyReqBean.getStudyId());
         studyReqBean.setStudyId(studyReqBean.getStudyId());
         if (participantId != null && !participantId.isEmpty())
           studyBean.setParticipantId(participantId);
-        studyBean.setDelete(studyReqBean.getDelete());
         studyBean.setStudyId(studyReqBean.getStudyId());
         deleteData.add(studyReqBean.getStudyId());
 
@@ -273,32 +277,17 @@ public class UserManagementProfileServiceImpl implements UserManagementProfileSe
         auditRequest.setParticipantId(studyBean.getParticipantId());
         auditRequest.setUserId(userId);
 
-        retVal =
-            userManagementUtil.withdrawParticipantFromStudy(
-                studyBean.getParticipantId(),
-                studyBean.getStudyId(),
-                studyBean.getDelete(),
-                auditRequest);
+        Optional<StudyEntity> optStudyEntity =
+            studyRepository.findByCustomStudyId(studyBean.getStudyId());
 
-        if (Boolean.valueOf(studyReqBean.getDelete())) {
-
-          Map<String, String> map =
-              Collections.singletonMap("delete_or_retain", CommonConstants.DELETE);
-
-          userMgmntAuditHelper.logEvent(
-              DATA_RETENTION_SETTING_CAPTURED_ON_WITHDRAWAL, auditRequest, map);
-
-          if (retVal.equalsIgnoreCase(MyStudiesUserRegUtil.ErrorCodes.SUCCESS.getValue())) {
-            userMgmntAuditHelper.logEvent(PARTICIPANT_DATA_DELETED, auditRequest);
-          }
-
-        } else {
-
-          Map<String, String> map =
-              Collections.singletonMap("delete_or_retain", CommonConstants.RETAIN);
-
-          userMgmntAuditHelper.logEvent(
-              DATA_RETENTION_SETTING_CAPTURED_ON_WITHDRAWAL, auditRequest, map);
+        if (optStudyEntity.isPresent()) {
+          auditRequest.setStudyVersion(String.valueOf(optStudyEntity.get().getVersion()));
+          retVal =
+              userManagementUtil.withdrawParticipantFromStudy(
+                  studyBean.getParticipantId(),
+                  studyBean.getStudyId(),
+                  String.valueOf(optStudyEntity.get().getVersion()),
+                  auditRequest);
         }
       }
     } else {
@@ -331,7 +320,7 @@ public class UserManagementProfileServiceImpl implements UserManagementProfileSe
   @Transactional()
   @Override
   public EmailResponse resendConfirmationthroughEmail(
-      String applicationId, String securityToken, String emailId) {
+      String applicationId, String securityToken, String emailId, String appName) {
     logger.info("UserManagementProfileServiceImpl - resendConfirmationthroughEmail() - Starts");
     AppEntity appPropertiesDetails = null;
 
@@ -354,9 +343,7 @@ public class UserManagementProfileServiceImpl implements UserManagementProfileSe
       subject = appPropertiesDetails.getRegEmailSub();
     }
 
-    if (appPropertiesDetails != null) {
-      templateArgs.put("appName", appPropertiesDetails.getAppName());
-    }
+    templateArgs.put("appName", appName);
     // TODO(#496): replace with actual study's org name.
     templateArgs.put("orgName", appConfig.getOrgName());
     templateArgs.put("contactEmail", appConfig.getContactEmail());

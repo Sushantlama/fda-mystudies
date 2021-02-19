@@ -446,13 +446,12 @@ public class StudyMetaDataUtil {
           final StringTokenizer tokenizer = new StringTokenizer(bundleIdAndAppToken, ":");
           final String bundleId = tokenizer.nextToken();
           final String appToken = tokenizer.nextToken();
-
           if (authPropMap.containsValue(bundleId) && authPropMap.containsValue(appToken)) {
             String appBundleId = "";
             String appTokenId = "";
             for (Map.Entry<String, String> map : authPropMap.entrySet()) {
               if (map.getValue().equals(appToken)) {
-                appTokenId = map.getValue();
+                appTokenId = map.getKey();
               }
 
               if (map.getValue().equals(bundleId)) {
